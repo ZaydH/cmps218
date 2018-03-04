@@ -103,7 +103,7 @@
   
   \begin{figure}[h]
     \centering
-    \scalebox{0.8}{
+    \scalebox{0.6}{ % Scaling factor for the plot.
       \begin{tikzpicture}
       \begin{axis}[ 
         axis line style = thick,
@@ -205,6 +205,29 @@
   \end{aligncustom}
   
   It is clear then that the expected waste is \boxed{0.938}.
+
+  {\color{red} EXPLAIN WHY LIKE SYMBOL CODES}
+
+  \newpage
+  \begin{problem}{20}{2}{2}
+    Show that as the stiffness~$\beta$ goes to~$\infty$, the soft K-means algorithm becomes identical to the original hard K-means algorithm except for the way in which means assigned no points behave.  Describe what those means do instead of sitting still.
+  \end{problem}
+
+  In the standard or ``hard'' K-means algorithm, each point is assigned to exactly one cluster.  As such, each of a cluster's points have equal membership.
+  
+  Soft K-means reduces the rigidity of the standard K-means by introducing a new ``stiffness'' hyperparameter,~$\beta$.  Rather than each point being a member of exclusively one cluster, the \textit{responsibility} for that point is shared among all $K$~clusters.  For a cluster~$k$ and point~$\textbf{x}^{(n)}$, the responsibility,~$r_{k}^{(n)}$ is: 
+  
+  \begin{equation}
+    r_k^{(n)} = \frac{\exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}{\sum_{k} \exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}
+  \end{equation}
+  
+  \noindent
+  where $d$ is the distance metric, and $m^{k}$ is the center of cluster~$k$.
+  
+  As $\beta$ increases, then even small differences in $d$ will cause massive disparities in responsibility.  As $\beta$ approaches infinity, all responsibility for a point will be assigned to its nearest cluster.  This behavior is exactly the same as standard, ``hard'' K-means.
+  
+  When performing Soft K-means with $\beta \rightarrow \infty$, it is possible that some clusters may have no responsibility for no points.  In which case, the centroid approaches the zero vector.
+  
   
 \end{document}
 
