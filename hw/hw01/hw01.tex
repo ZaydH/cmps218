@@ -8,12 +8,14 @@
 \usepgfplotslibrary{fillbetween}  % Allow for highlighting under a curve
 \usepackage{amsmath}    % Allows for piecewise functions using the ``cases'' construct
 %\usepackage{mathrsfs}   % Use the ``\mathscr'' command in an equation.
+\usepackage{siunitx}    % Allows for ``S'' alignment in table to align by decimal point
+\usepackage{enumitem}   % Reference enumerated item lists.
 
 \usepackage[obeyspaces,spaces]{url} % Used for typesetting with the ``path'' command
 \usepackage[hidelinks]{hyperref}   % Make the cross references clickable hyperlinks
 \usepackage[bottom]{footmisc} % Prevents the table going below the footnote
 \usepackage{nccmath}    % Needed in the workaround for the ``aligncustom'' environment
-\usepackage{amssymb}    % Used for black QED symbol   
+\usepackage{amssymb}    % Used for black QED symbol
 \usepackage{bm}    % Allows for bolding math symbols.
 \usepackage{tabto}     % Allows to tab to certain point on a line
 \usepackage{float}
@@ -91,21 +93,21 @@
 
 \begin{document}
   \maketitle
-  
+
   \begin{problem}{2}{9}{33}
     Two points are selected at random on a straight line segment of length~1.  What is the probability that a triangle can be constructed out of the three resulting segments.
   \end{problem}
-  
-  For the two randomly selected points,~$x_1$ and $x_2$, define $L_{\max}$ as the length of the longest segment.  By the triangle inequality theorem, it is clear that a triangle can only be formed from these three segments if ${L_{\max} < 0.5}$.  
-  
-  
+
+  For the two randomly selected points,~$x_1$ and $x_2$, define $L_{\max}$ as the length of the longest segment.  By the triangle inequality theorem, it is clear that a triangle can only be formed from these three segments if ${L_{\max} < 0.5}$.
+
+
   Consider the tuple ${(x_1,x_2)}$. Each point in the domain $(0,1)^2$ is equally likely since the points are selected randomly.  Figure~\ref{fig:problem2.9.33} shows the portions of this domain (highlighted in light blue) where the lines segments induced by $x_1$ and $x_2$ can be used to form a triangle.
-  
+
   \begin{figure}[h]
     \centering
     \scalebox{0.6}{ % Scaling factor for the plot.
       \begin{tikzpicture}
-      \begin{axis}[ 
+      \begin{axis}[
         axis line style = thick,
         axis lines=middle,
         xmin=0,
@@ -114,7 +116,7 @@
         ymax=1,
         xlabel=$x_1$,
         ylabel={$x_2$},
-      ] 
+      ]
       \addplot[name path=half, smooth, color=blue, domain=0:1] {0.5};
       \addplot[name path=f_1, smooth, color=blue, domain=0:0.5] {0.5 + x};
       \addplot[name path=f_2, smooth, color=blue, domain=0.5:1] {-.5+x};
@@ -123,9 +125,9 @@
       \addplot [
         thick,
         color=blue,
-        fill=blue, 
+        fill=blue,
         fill opacity=0.05
-        ] 
+        ]
         fill between[
         of=f_1 and half,
         soft clip={domain=0:.5},
@@ -133,9 +135,9 @@
       \addplot [
         thick,
         color=blue,
-        fill=blue, 
+        fill=blue,
         fill opacity=0.05
-        ] 
+        ]
         fill between[
         of=f_2 and half,
         soft clip={domain=0.5:1},
@@ -147,15 +149,15 @@
   \end{figure}
 
   Since the probability selecting any point within the above domain is uniform, the probability of selecting points that form a triangle is found via:
-  
+
   \begin{aligncustom}
     \Pr(\text{Form a line}) &= \frac{2 * \text{Area of Trianges}}{\text{Total Area}}\\
                             &= \frac{2 * \left(\frac{1}{2}\right)^{2}}{1}\\
                             &= \boxed{\frac{1}{4}}
   \end{aligncustom}
-  
+
   \newpage
-  \begin{problem}{5}{9}{30}
+  \begin{problem}{5}{8}{30}
     \textit{Scientific American} carried the following puzzle in 1975.
     \problemspace
     \textbf{The poisoned glass:} \textnormal{\textit{'Mathematicians are curious birds,' the police commissioner said to his wife. 'You see, we had all those partly filled glasses lined up in rows on a table in the hotel kitchen. Only one contained poison, and we wanted to know which one before searching the glass for fingerprints.  Our lab could test the liquid in each glass, but the tests take time and money, so we wanted to make as few of them as possible by simultaneously testing mixtures of small samples from groups of glasses.  The university sent over a mathematics professor to help us.  He counted the glasses, smiled and said: \\ ``Pick any glass you want, Commissioner. We'll test it first.'' \\ ``But won't that waste a test?'' I asked. \\ ``No,'' he said. ``it's part of the best procedure.  We can test one glass first.  It doesn't matter which one.'' \\ `How many glasses were there to start with?' the commissioner's wife asked. \\ 'I don't remember. Somewhere between 100 and 200.'} \\What was the exact number of glasses?}
@@ -164,9 +166,9 @@
   \end{problem}
 
   The test for poison has a binary outcome, i.e.,~the sample either has poison or not.  Therefore, assuming each cup has poison with equal probability, the size of the remaining set of glasses is, on average, cut in half with each test.
-  
+
   If the number of glasses,~$n$, is a power of~$2$, then the number of tests required is $\lg n$, where $\lg$ is the base-$2$ logarithm.  Note that the only power of~2 between 100 and 200 is 128.  There was one extra glass that the professor tested separately.  Therefore, there was \boxed{129~\text{glasses}}.
-  
+
   \begin{table}[h]
     \centering
     \begin{tabular}{c|c|c}
@@ -177,36 +179,53 @@
     \end{tabular}
     \caption{Number of tests required using the professors strategy}\label{tab:problem5.9.20-Prof}
   \end{table}
-  
+
   Table~\ref{tab:problem5.9.20-Prof} shows the number of tests required when using the professors strategy.  Glass~\#1 represents the first glass test.  In the unlikely event that glass has the poison, no additional testing is required. In contrast, the poison is in one of the other 128~glasses, seven tests (plus the additional one for the first glass) are required.  Using this strategy, the expected number of tests is:
-  
+
   \begin{aligncustom}
     \mathbb{E}(\text{Professor's Strategy}) &= \frac{1}{129} \cdot 1 + \frac{128}{129} \cdot 8 \\
-                                            &\approx \boxed{7.946}\text{.} 
+                                            &\approx \boxed{7.946}\text{.}
   \end{aligncustom}
-  
+
+
+  In contrast, the optimal strategy is:
+
+  \begin{enumerate}
+    \item Select one glass at random and leave it off to the side.
+    \item\label{itm:test} Test a sample that combines wine from half of the remaining glasses (excluding the one off to the side).
+    \item\label{itm:discard} If poison is observed in this tested sample, discard the untested glasses.  Otherwise, discard the tested glasses.
+    \item Repeat steps~\#\ref{itm:test} and~\#\ref{itm:discard} until only a single glass remains (excluding the one off to the side).
+    \item If poison was ever observed in any of the previous tests, then the remaining glass not off to the side has the poison, and no additional testing is required.
+    \item\label{itm:testRemaining} If poison was not observed in any test, then test just the remaining glass not off to the side. If poison is detected, then the answer is clear; otherwise, the glass off to the side has the poison.
+  \end{enumerate}
+
+  Table~\ref{tab:problem5.9.20-Opt} shows the number of tests required using this optimum strategy.    Note that glass~129 entails step~\#\ref{itm:testRemaining} where no sample tests positive for poison up to the last remaining glass not off to the side.
+
   \begin{table}[h]
     \centering
     \begin{tabular}{c|c|c}
       \hline
       Glass ID & Probability of Poison & \# Tests  \\\hline
       1        & 1/129                 & 7 + 1     \\\hline
-      2-129    & 128/129               & 7         \\\hline
+      2-128    & 127/129               & 7         \\\hline
+      129      & 1/129                 & 7 + 1     \\\hline
     \end{tabular}
     \caption{Number of tests required using the optimum strategy}\label{tab:problem5.9.20-Opt}
   \end{table}
-  
-  Rather than testing the one additional glass separately as the professor did, the optimum approach would be to test that glass last since it is very unlikely to have the poison.  Table~\ref{tab:problem5.9.20-Opt} shows the number of tests required using this optimum strategy.    Using this optimum strategy, the expected number of tests is:
- 
-  
-  \begin{aligncustom}
-    \mathbb{E}(\text{Optimum Strategy}) &= \frac{1}{129} \cdot 8 + \frac{128}{129} \cdot 7 \\
-    &\approx \boxed{7.008}\text{.} 
-  \end{aligncustom}
-  
-  It is clear then that the expected waste is \boxed{0.938}.
 
-  {\color{red} EXPLAIN WHY LIKE SYMBOL CODES}
+  \noindent
+  Using this optimum strategy, the expected number of tests is:
+
+
+  \begin{aligncustom}
+    \mathbb{E}(\text{Optimum Strategy}) &= \frac{2}{129} \cdot 8 + \frac{127}{129} \cdot 7 \\
+    &\approx \boxed{7.016}\text{.}
+  \end{aligncustom}
+
+  It is clear then that the expected waste is \boxed{0.93} tests.
+
+  Maximum compression of a symbol code is achieved by giving shorter codes to outcomes with higher probability.  In contrast, the professor prioritized the least likely outcome by testing the randomly selected outcome first.  The optimal strategy described above always tests the most likely outcome (i.e., more glasses at once) similar to how symbol codes are encoded.
+
 
   \newpage
   \begin{problem}{20}{2}{2}
@@ -214,20 +233,42 @@
   \end{problem}
 
   In the standard or ``hard'' K-means algorithm, each point is assigned to exactly one cluster.  As such, each of a cluster's points have equal membership.
-  
-  Soft K-means reduces the rigidity of the standard K-means by introducing a new ``stiffness'' hyperparameter,~$\beta$.  Rather than each point being a member of exclusively one cluster, the \textit{responsibility} for that point is shared among all $K$~clusters.  For a cluster~$k$ and point~$\textbf{x}^{(n)}$, the responsibility,~$r_{k}^{(n)}$ is: 
-  
+
+  Soft K-means reduces the rigidity of the standard K-means by introducing a new ``stiffness'' hyperparameter,~$\beta$.  Rather than each point being a member of exclusively one cluster, the \textit{responsibility} for that point is shared among all $K$~clusters.  For a cluster~$k$ and point~$\textbf{x}^{(n)}$, the responsibility,~$r_{k}^{(n)}$ is:
+
   \begin{equation}
     r_k^{(n)} = \frac{\exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}{\sum_{k} \exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}
   \end{equation}
-  
+
   \noindent
   where $d$ is the distance metric, and $m^{k}$ is the center of cluster~$k$.
-  
+
   As $\beta$ increases, then even small differences in $d$ will cause massive disparities in responsibility.  As $\beta$ approaches infinity, all responsibility for a point will be assigned to its nearest cluster.  This behavior is exactly the same as standard, ``hard'' K-means.
-  
+
   When performing Soft K-means with $\beta \rightarrow \infty$, it is possible that some clusters may have no responsibility for no points.  In which case, the centroid approaches the zero vector.
-  
-  
+
+  \newpage
+  \begin{problem}{22}{5}{15}
+    The seven scientists. $N$~datapoints $\{x_n\}$ are drawn from $N$~distributions, all of which are Gaussian with a common mean~$\mu$ but with different unknown standard deviations~$\sigma_n$.  What are the maximum likelihood parameter $\mu$,$\{\sigma_n\}$ given the data?  For example, seven scientists (A, B, C, D, E, F, G) with wildly-differing experimental skills measure~$\mu$.  You expect some of them to do accurate work (i.e.,~to have small~$\sigma_n$), and some of them to turn in wildly inaccurate results (i.e.,~to have enormous~$\sigma_n$).  Table~\ref{tab:problem22.5.15} shows their seven results.  What is the~$\mu$, and how reliable is each scientist?
+
+    \begin{table}[h]
+      \centering
+      \begin{tabular}{c|S}
+        \hline
+        Scientist & $x_n$     \\\hline
+        A         & -27.020   \\\hline
+        B         & 3.570     \\\hline
+        C         & 8.191     \\\hline
+        D         & 9.898     \\\hline
+        E         & 9.603     \\\hline
+        F         & 9.945     \\\hline
+        G         & 10.056    \\\hline
+      \end{tabular}
+      \caption{Seven measurements $\{x_n\}$ of a parameter $\mu$ by seven scientists each having his own noise-level $\sigma_n$.}\label{tab:problem22.5.15}
+    \end{table}
+
+    I hope that you agree that, intuitively, it looks pretty certain that A and B are both inept measurers, that D-G are better, and that the true value $\mu$ is somewhere close to~10.  But what does maximizing the likelihood tell you?
+  \end{problem}
+
 \end{document}
 
