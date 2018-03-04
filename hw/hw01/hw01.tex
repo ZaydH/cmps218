@@ -270,5 +270,44 @@
     I hope that you agree that, intuitively, it looks pretty certain that A and B are both inept measurers, that D-G are better, and that the true value $\mu$ is somewhere close to~10.  But what does maximizing the likelihood tell you?
   \end{problem}
 
+  Given $n$ observers that each make a single observeration with a common mean $\mu$ and standard deviations $\{\sigma_n\}$, the maximum likelihood mean, $\bar{x}$, is:
+
+  \[\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}\textrm{.}\]
+
+  \noindent
+  In the case of the seven scientists, the sample mean is:
+
+  \begin{aligncustom}
+    \bar{x} &= \frac{-27.020 + 3.570 + 8.191 + 9.898 + 9.603 + 9.945 + 10.056}{7}\\
+            &= \boxed{3.463}
+  \end{aligncustom}
+
+  For observer $i$ where ${1 \leq i \leq n}$, the maximum likelihood standard deviation is:
+
+  \[ \sigma_i = \lvert x_i - \mu \rvert \]
+
+  \noindent
+  since there is only one sample per distribution. Table~\ref{tab:problem22.5.15Stdev} lists the maximum likelihood standard deviations for the seven scientists.
+
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{c|S}
+      \hline
+      Scientist & $x_n$     \\\hline
+      A         & 30.483    \\\hline
+      B         & 0.107     \\\hline
+      C         & 4.728     \\\hline
+      D         & 6.435     \\\hline
+      E         & 6.140     \\\hline
+      F         & 6.482     \\\hline
+      G         & 6.593    \\\hline
+    \end{tabular}
+    \caption{Maximum likelihood $\sigma$ for the seven scientists}\label{tab:problem22.5.15Stdev}
+  \end{table}
+
+  From the data, it appears that scientists D\textendash G are reliable.  Scientist C appears less reliable than them, but better than A and B which appear to be the worst.
+
+  Clearly for this problem, maximizing the likelihood does not yield the most plausible outcome.  There are four observers that essentially measure the same value; it is theoretically possible these measurements are due to coincidence.  However, that it is unlikely given the problem description.  Therefore, relying blindly on the maximum likelihood calculation may lead to poor conclusions.
+
 \end{document}
 
