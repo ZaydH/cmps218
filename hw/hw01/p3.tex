@@ -8,7 +8,7 @@ In the standard or ``hard'' K-means algorithm, each point is assigned to exactly
 Soft K-means reduces the rigidity of the standard K-means by introducing a new ``stiffness'' hyperparameter,~$\beta$.  Rather than each point being a member of exclusively one cluster, the \textit{responsibility} for that point is shared (generally unevenly) among all $K$~clusters.  For cluster~$k$ and point~$\textbf{x}^{(n)}$, the responsibility,~$r_{k}^{(n)}$ is:
 
 \begin{equation}
-  r_k^{(n)} = \frac{\exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}{\sum_{k} \exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}
+  r_k^{(n)} = \frac{\exp(-\beta d(\textbf{m}^{k}, \textbf{x}^{(n)}))}{\sum_{k'sum()} \exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}
 \end{equation}
 
 \noindent

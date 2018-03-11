@@ -15,47 +15,34 @@
       F         & 9.945     \\\hline
       G         & 10.056    \\\hline
     \end{tabular}
-    \caption{Seven measurements $\{x_n\}$ of a parameter $\mu$ by seven scientists each having his own noise-level $\sigma_n$.}\label{tab:problem22.5.15}
+    \caption{Seven measurements $\{x_n\}$ of a parameter $\mu$ \\ by seven scientists each having his own noise-level $\sigma_n$.}\label{tab:problem22.5.15}
   \end{table}
 
   I hope that you agree that, intuitively, it looks pretty certain that A and B are both inept measurers, that D-G are better, and that the true value $\mu$ is somewhere close to~10.  But what does maximizing the likelihood tell you?
 \end{problem}
 
-Given $n$ observers that each make a single observation with a common mean $\mu$ and standard deviations $\{\sigma_n\}$, the maximum likelihood mean, $\bar{x}$, is:
+Given~$\mu$, the probability that observer~$i$ with measurement standard deviation~$\sigma_i$ measures any single value,~$x_i$, is:
 
-\[\bar{x} = \frac{\sum_{i=1}^{n}x_i}{n}\textrm{.}\]
+\[ \Pr\left(x_i \vert \mu,\sigma_i \right) = \frac{1}{\sqrt{2\pi\sigma_i^2}} \exp\left(\frac{-(x_i - \mu)^2}{2\sigma_i^2}\right) \text{.}\]
 
-\noindent
-In the case of the seven scientists, the sample mean is:
+If there are $n$ observers, then the probability,~$p$, of the measurements~$\{x_i\}$ where ${i\in \{1,\ldots,n\}}$ is:
+
+\[ p = \Pr\left({\{x_i\}} \vert \mu,\{\sigma_i\} \right) = \prod_{i=1}^n\frac{1}{\sqrt{2\pi\sigma_i^2}} \exp\left(\frac{-(x_i - \mu)^2}{2\sigma_i^2}\right) \text{.}\]
+
+Taking the natural logarithm of this function yields:
+
+\[ \ln p =  \sum_{i=1}^{n} \left(-\frac{1}{2}\ln\left(2\pi\sigma_i^2\right) - \frac{(x_i - \mu)^2}{2\sigma_i^2}\right) \text{.}\]
+
+Since the natural logarithm function is strictly increasing, we can take the derivative of ${\ln p}$ with respect to $\mu$ to find the maximum likelihood for $\mu$.  This yields:
 
 \begin{aligncustom}
-  \bar{x} &= \frac{-27.020 + 3.570 + 8.191 + 9.898 + 9.603 + 9.945 + 10.056}{7}\\
-          &= \boxed{3.463}
+  0   &= \sum_{i=1}^{N}{\frac{\left(x_i-\mu\right)}{\sigma_{i}^{2}}}\\
+  \mu &= \frac{1}{\sum_{i=1}^{N}{\sigma_{i}^{-2}}} \sum_{i=1}^{N}{\frac{x_i}{\sigma_i^2}} \text{.}
 \end{aligncustom}
 
-For observer $i$ where ${1 \leq i \leq n}$, the maximum likelihood standard deviation is:
+For each $\sigma_{i}$, the maximum likelihood estimate is found by taking the partial derivative with respect to $\sigma_i$ yielding:
 
-\[ \sigma_i = \lvert x_i - \mu \rvert \]
-
-\noindent
-since there is only one sample per distribution. Table~\ref{tab:problem22.5.15Stdev} lists the maximum likelihood standard deviations for the seven scientists.
-
-\begin{table}[h]
-  \centering
-  \begin{tabular}{c|S}
-    \hline
-    Scientist & $x_n$     \\\hline
-    A         & 30.483    \\\hline
-    B         & 0.107     \\\hline
-    C         & 4.728     \\\hline
-    D         & 6.435     \\\hline
-    E         & 6.140     \\\hline
-    F         & 6.482     \\\hline
-    G         & 6.593    \\\hline
-  \end{tabular}
-  \caption{Maximum likelihood $\sigma$ for the seven scientists}\label{tab:problem22.5.15Stdev}
-\end{table}
-
-From the data, it appears that scientists D\textendash G are reliable.  Scientist C appears less reliable than them, but better than A and B which appear to be the worst.
-
-Clearly for this problem, maximizing the likelihood does not yield the most plausible outcome.  There are four observers that essentially measure the same value; it is theoretically possible these measurements are due to coincidence.  However, that it is unlikely given the problem description.  Therefore, relying blindly on the maximum likelihood calculation may lead to poor conclusions.
+\begin{aligncustom}
+  0   &= -\frac{2\pi\sigma_{i}}{4\pi\sigma_{i}^2} + \frac{\left(x_{i}-\mu\right)^{2}}{\sigma_{i}^{3}} \\
+  \sigma_i &= \sqrt{\left(x_i-\mu\right)^2} = \abs{x_i-\mu} \text{.}
+\end{aligncustom}

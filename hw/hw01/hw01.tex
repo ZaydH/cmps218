@@ -7,6 +7,9 @@
 \pgfplotsset{compat=newest}
 \usepgfplotslibrary{fillbetween}  % Allow for highlighting under a curve
 \usepackage{amsmath}    % Allows for piecewise functions using the ``cases'' construct
+\newcommand{\abs}[1]{\lvert#1\rvert}%
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
 %\usepackage{mathrsfs}   % Use the ``\mathscr'' command in an equation.
 \usepackage{siunitx}    % Allows for ``S'' alignment in table to align by decimal point
 \usepackage{enumitem}   % Reference enumerated item lists.
@@ -93,6 +96,21 @@
 
 \begin{document}
   \maketitle
+
+  \textbf{Name}: Zayd Hammoudeh
+
+  \textbf{Assignment}:  CMPS218 Homework~\#1
+
+  \textbf{Other Student Discussions}: I discussed the problems in this homework with the following students:
+  \vspace{-3em}
+  \begin{itemize}[leftmargin=1.35cm]
+    \setlength\itemsep{0em}
+    \item Noujan Pashanasangi -- We discussed second problem concerning the poisoned glass.
+    
+    \item Will Bolden -- We discussed second and third problems.  In particular, we discussed the fourth problem in depth.
+  \end{itemize}
+
+  \textbf{Problem Assessments}: All problems should be complete.  The answer to the fourth problem was the most challenging is the one where I believe my answer may be the most suspect.
 
   \include{p1}
   
