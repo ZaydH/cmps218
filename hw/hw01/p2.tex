@@ -1,0 +1,68 @@
+\newpage
+\begin{problem}{5}{8}{30}
+  \textit{Scientific American} carried the following puzzle in 1975.
+  \problemspace
+  \textbf{The poisoned glass:} \textnormal{\textit{'Mathematicians are curious birds,' the police commissioner said to his wife. 'You see, we had all those partly filled glasses lined up in rows on a table in the hotel kitchen. Only one contained poison, and we wanted to know which one before searching the glass for fingerprints.  Our lab could test the liquid in each glass, but the tests take time and money, so we wanted to make as few of them as possible by simultaneously testing mixtures of small samples from groups of glasses.  The university sent over a mathematics professor to help us.  He counted the glasses, smiled and said: \\ ``Pick any glass you want, Commissioner. We'll test it first.'' \\ ``But won't that waste a test?'' I asked. \\ ``No,'' he said. ``it's part of the best procedure.  We can test one glass first.  It doesn't matter which one.'' \\ `How many glasses were there to start with?' the commissioner's wife asked. \\ 'I don't remember. Somewhere between 100 and 200.'} \\What was the exact number of glasses?}
+  \problemspace
+  Solve this puzzle and then explain why the professor is in fact wrong and the commissioner was right.  What is in fact the optimal procedure for identifying the one poisoned glass?  What is the expected waste relative to this optimum if one followed the professor's strategy?  Explain the relationship to symbol coding.
+\end{problem}
+
+The test for poison has a binary outcome, i.e.,~the sample either has poison or not.  Therefore, assuming each cup has poison with equal probability, the size of the remaining set of glasses is, on average, cut in half with each test.
+
+If the number of glasses,~$n$, is a power of~$2$, then the number of tests required is $\lg n$, where $\lg$ is the base-$2$ logarithm.  Note that the only power of~2 between 100 and 200 is 128.  There was one extra glass that the professor tested separately.  Therefore, there was \boxed{129~\text{glasses}}.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{c|c|c}
+    \hline
+    Glass ID & Probability of Poison & \# Tests  \\\hline
+    1        & 1/129                 & 1         \\\hline
+    2-129    & 128/129               & 1 + 7 = 8 \\\hline
+  \end{tabular}
+  \caption{Number of tests required using the professor's strategy}\label{tab:problem5.9.20-Prof}
+\end{table}
+
+Table~\ref{tab:problem5.9.20-Prof} shows the number of tests required when using the professor's strategy.  Glass~\#1 represents the first glass tested, i.e.,~the one selected at random.  In the unlikely event that glass has the poison, no additional testing is required. In contrast, if the poison is in one of the other 128~glasses, seven tests (plus the additional one for the first glass) are required.  Using this strategy, the expected number of tests is:
+
+\begin{aligncustom}
+  \mathbb{E}(\text{Professor's Strategy}) &= \frac{1}{129} \cdot 1 + \frac{128}{129} \cdot 8 \\
+                                          &\approx \boxed{7.946}\text{.}
+\end{aligncustom}
+
+
+In contrast, the optimal strategy is:
+
+\begin{enumerate}
+  \item Select one glass at random and leave it off to the side.
+  \item\label{itm:test} Test a sample that combines wine from half of the remaining glasses (excluding the one off to the side).
+  \item\label{itm:discard} If poison is observed in this tested sample, discard the untested glasses.  Otherwise, discard the tested glasses.
+  \item Repeat steps~\#\ref{itm:test} and~\#\ref{itm:discard} until only a single glass remains (excluding the one off to the side).
+  \item If poison was ever observed in any of the previous tests, then the remaining glass not off to the side has the poison, and no additional testing is required.
+  \item\label{itm:testRemaining} If poison was never observed in any test, then test just the remaining glass not off to the side. If poison is detected, then the answer is clear, and the tested glass has poison; otherwise, the glass off to the side has the poison.
+\end{enumerate}
+
+Table~\ref{tab:problem5.9.20-Opt} shows the number of tests required using this optimum strategy.    Note that Glass\#~129 entails the remaining glass in step~\#\ref{itm:testRemaining} where no sample tests positive for poison up to the last remaining glass not off to the side.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{c|c|c}
+    \hline
+    Glass ID & Probability of Poison & \# Tests  \\\hline
+    1        & 1/129                 & 7 + 1     \\\hline
+    2-128    & 127/129               & 7         \\\hline
+    129      & 1/129                 & 7 + 1     \\\hline
+  \end{tabular}
+  \caption{Number of tests required using the optimum strategy}\label{tab:problem5.9.20-Opt}
+\end{table}
+
+\noindent
+Using this optimum strategy, the expected number of tests is:
+
+\begin{aligncustom}
+  \mathbb{E}(\text{Optimum Strategy}) &= \frac{2}{129} \cdot 8 + \frac{127}{129} \cdot 7 \\
+  &\approx \boxed{7.016}\text{.}
+\end{aligncustom}
+
+It is clear then that the expected waste of the professor's strategy is \boxed{0.93} tests.
+
+Maximum compression of a symbol code is achieved by assigning shorter codes (i.e.,~with less bits) to outcomes with higher probability.  In contrast, the professor prioritized the least likely outcome by testing the randomly selected glass first.  The optimal strategy described above always tests the most likely outcome (i.e.,~more glasses at once) similar to how symbol codes are encoded.

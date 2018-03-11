@@ -1,0 +1,28 @@
+\newpage
+\begin{problem}{20}{2}{2}
+  Show that as the stiffness~$\beta$ goes to~$\infty$, the soft K-means algorithm becomes identical to the original hard K-means algorithm except for the way in which means assigned no points behave.  Describe what those means do instead of sitting still.
+\end{problem}
+
+In the standard or ``hard'' K-means algorithm, each point is assigned to exactly one cluster.  As such, each of a cluster's points have equal membership.
+
+Soft K-means reduces the rigidity of the standard K-means by introducing a new ``stiffness'' hyperparameter,~$\beta$.  Rather than each point being a member of exclusively one cluster, the \textit{responsibility} for that point is shared (generally unevenly) among all $K$~clusters.  For cluster~$k$ and point~$\textbf{x}^{(n)}$, the responsibility,~$r_{k}^{(n)}$ is:
+
+\begin{equation}
+  r_k^{(n)} = \frac{\exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}{\sum_{k} \exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))}
+\end{equation}
+
+\noindent
+where $d$ is the distance metric, and $m^{k}$ is the center of cluster~$k$.
+
+As $\beta$ increases, then even small differences in $d$ can cause massive changes in responsibility.  As ${\beta \rightarrow \infty}$, all responsibility for a point will be assigned to its nearest cluster.  This behavior is exactly the same as standard, ``hard'' K-means where points belong to only the cluster's whose centroid is closest.
+
+Considering the second part of the question, the centroid update rule for cluster,~$k$, is:
+
+\[ \mathbf{m}^{(k)} = \frac{\sum_{n}r^{(n)}_k \mathbf{x}^{(n)}}{R^{(k)}} \]
+
+\noindent
+where the total responsibility, $R^{(k)}$, for cluster $k$ is:
+
+\[ R^{(k)}=\sum_{n} r_{k}^{(n)} \text{.} \]
+
+As mentioned previously, when $\beta$ is large, small differences in $d$ result in substantial changes in $r_{k}^{(n)}$. As $\beta$ approaches~$\infty$, $r_{k}^{(i)}$ will approach $0$ at different rates for different points.  Eventually, the $r_{n}^{(n)}$ for a single point will dominate and $m^{(n)}$ will move closer and closer to that single points value until they are equal for very large $\beta$.

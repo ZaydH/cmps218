@@ -1,0 +1,40 @@
+  \scalebox{0.6}{ % Scaling factor for the plot.
+  \begin{tikzpicture}
+  \begin{axis}[
+  axis line style = thick,
+  axis lines=middle,
+  xmin=0,
+  xmax=1,
+  ymin=0,
+  ymax=1,
+  xlabel=$x_1$,
+  ylabel={$x_2$},
+  ]
+  \addplot[name path=half, smooth, color=blue, domain=0:1] {0.5};
+  \addplot[name path=f_1, smooth, color=blue, domain=0:0.5] {0.5 + x};
+  \addplot[name path=f_2, smooth, color=blue, domain=0.5:1] {-.5+x};
+  \draw [color=blue, thick] (0.5,0) -- (0.5,1);
+  \path[name path=axis] (axis cs:0,0) -- (axis cs:1,0); % X axis for fill between
+  \addplot [
+  thick,
+  color=blue,
+  fill=blue,
+  fill opacity=0.05
+  ]
+  fill between[
+  of=f_1 and half,
+  soft clip={domain=0:.5},
+  ];
+  \addplot [
+  thick,
+  color=blue,
+  fill=blue,
+  fill opacity=0.05
+  ]
+  fill between[
+  of=f_2 and half,
+  soft clip={domain=0.5:1},
+  ];
+  \end{axis}
+  \end{tikzpicture}
+}
