@@ -37,7 +37,7 @@ Taking the natural logarithm of this function yields:
 
 \[ \ln L =  \sum_{i=1}^{n} \left(-\frac{1}{2}\ln\left(2\pi\sigma_{n}^2\right) - \frac{(x_{n} - \mu)^2}{2\sigma_{n}^2}\right) \text{.}\]
 
-Since the natural logarithm function is strictly increasing, we can take the derivative of ${\ln p}$ with respect to $\mu$ to find the maximum likelihood for $\mu$.  This yields:
+Since the natural logarithm function is strictly increasing, we can take the derivative of ${\ln L}$ with respect to $\mu$ to find the maximum likelihood for $\mu$.  This yields:
 
 \begin{aligncustom}
   0   &= \sum_{i=1}^{N}{\frac{\left(x_{n}-\mu\right)}{\sigma_{n}^{2}}}\\
@@ -58,4 +58,4 @@ To find the maximum likelihood,~$L_{\max}$, substitute the definition found abov
            &= \prod_{i=1}^{n}\frac{1}{\sqrt{2\pi(x_{n}-\mu)^2}} \exp\left(-\frac{1}{2}\right)\text{.}
 \end{aligncustom}
 
-Therefore, the likelihood is maximized when $\mu=x_{n}$.  For this problem, $x_{n}$~is any value in Table~\ref{tab:problem22.5.15} meaning the maximum likelihood is when any of the seven scientists are perfectly correct, i.e.,~always report the true~$\mu$ with no variation.  This result is disquieting as it means the likelihood is maximized if~$\mu$ is~-27.020 or~3.570.  As noted in the question itself, the visceral feeling is that the true~$\mu$ is around ten give or take.
+Therefore, the likelihood is maximized when $\mu=x_{n}$.  For this problem, $x_{n}$~is any value in Table~\ref{tab:problem22.5.15} meaning the maximum likelihood is when any of the seven scientists are perfectly correct, i.e.,~always report the true~$\mu$ with no variation.  This result is disquieting as it means the likelihood is maximized if~$\mu$ is~-27.020 or~3.570.  As noted in the question itself, the visceral feeling is that the true~$\mu$ is around ten give or take.  Therefore, maximizing the likelihood may not always yield the best result.
