@@ -5,7 +5,7 @@
 
 In the standard or ``hard'' K-means algorithm, each point is assigned to exactly one cluster.  As such, each of a cluster's points have equal membership.
 
-Soft K-means reduces the rigidity of the standard K-means by introducing a new ``stiffness'' hyperparameter,~$\beta$.  Rather than each point being a member of exclusively one cluster, the \textit{responsibility} for that point is shared (generally unevenly) among all $K$~clusters.  For cluster~$k$ and point~$\textbf{x}^{(n)}$, the responsibility,~$r_{k}^{(n)}$, is:
+Soft K-means reduces the rigidity of the standard K-means by introducing a new ``stiffness'' hyperparameter,~$\beta$.  Rather than each point being a member of exclusively one cluster, the \textit{responsibility} for each point is shared (generally unevenly) among all $K$~clusters.  For cluster~$k\in\{1,\ldots,K\}$ and point~$\textbf{x}^{(n)}$, the responsibility,~$r_{k}^{(n)}$, is:
 
 \[ r_{k}^{(n)} = \frac{\exp(-\beta d(\textbf{m}^{k}, \textbf{x}^{(n)}))}{\sum_{k'} \exp(-\beta d(\textbf{m}^{k'}, \textbf{x}^{(n)}))} \]
 
@@ -23,4 +23,4 @@ where the total responsibility, $R^{(k)}$, for cluster $k$ is:
 
 \[ R^{(k)}=\sum_{n} r_{k}^{(n)} \text{.} \]
 
-As mentioned previously, when $\beta$ is large, small differences in $d$ result in substantial changes in $r_{k}^{(n)}$. As $\beta$ approaches~$\infty$, $r_{k}^{(i)}$ will approach $0$ at different rates for different points.  In that case, the centroid will move to the center of the point over which it has the most responsibility (generally, but not necessarily the closest one).
+As mentioned previously, small differences in the distance,~$d$, cause huge differences in the responsibility,~$r$, when $\beta$ approaches infinity.  In hard K-means, it was possible for a cluster to be assigned no points.  However, in soft K-Means, such clusters still have \textit{some} responsibility for every point, albeit infinitesimally small when $\beta$ approaches infinity.  In that case, those means will move to the \textit{location of the point,~$\textnormal{\textbf{x}}^{(n)}$, nearest to that mean}.

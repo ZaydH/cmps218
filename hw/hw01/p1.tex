@@ -2,10 +2,13 @@
   Two points are selected at random on a straight line segment of length~1.  What is the probability that a triangle can be constructed out of the three resulting segments?
 \end{problem}
 
-For the two randomly selected points,~$x_1$ and $x_2$, define $L_{\max}$ as the length of the longest segment.  By the triangle inequality theorem, it is clear that a triangle can only be formed from these three resulting segments if ${L_{\max} < 0.5}$.
+For two randomly selected points,~$0 \leq x_1 \leq 1$ and $0 \leq x_2 \leq 1$, define $L_{\max}$ as:
 
+\[L_{\max} = \max\bigg\{\min\{x_{1},x_{2}\},~\abs{x_{2} - x_{1}},~1-\max\{x_{1},x_{2}\} \bigg\}\text{.}\]
 
-Consider the tuple ${(x_1,x_2)}$. Each point in the domain $(0,1)^2$ is equally likely since $x_1$ and $x_2$ are selected randomly.  Figure~\ref{fig:problem2.9.33} shows the portions of this domain (highlighted in light blue) where the lines segments induced by $x_1$ and $x_2$ can be used to form a triangle.
+By the triangle inequality theorem, it is clear that a triangle can only be formed from these three resulting segments if ${L_{\max} < \frac{1}{2}}$.  Therefore if $x_{1} < \frac{1}{2}$, then $\frac{1}{2} < x_2 < x_{1} + \frac{1}{2}$.  Similarly, if $x_{1} > \frac{1}{2}$, then $x_{1} - \frac{1}{2} <  x_2 < \frac{1}{2}$.
+
+Consider the tuple ${(x_1,x_2)}$. Each point in the domain $[0,1]^2$ is equally likely since $x_1$ and $x_2$ are selected (uniformly) at random.  Figure~\ref{fig:problem2.9.33} shows the portions of this domain (highlighted in light blue) where the lines segments induced by $x_1$ and $x_2$ can be used to form a triangle.  Note that these shaded regions correspond to the valid ranges for $x_1$ and $x_2$ derived from the triangle inequality above.
 
 \begin{figure}[h]
   \centering
@@ -18,5 +21,5 @@ Since the probability of selecting any point from the above domain is uniform, t
 \begin{aligncustom}
   \Pr(\text{Form a triangle}) &= \frac{\text{Shaded Area}}{\text{Total Area}}\\
                               &= \frac{2 \cdot \left(\frac{1}{2}\right)^{3}}{1}\\
-                              &= \boxed{\frac{1}{4}}
+                              &= \boxed{\frac{1}{4}}\text{.}
 \end{aligncustom}

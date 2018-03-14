@@ -22,7 +22,7 @@ If the number of glasses,~$n$, is a power of~$2$, then the number of tests requi
   \caption{Number of tests required using the professor's strategy}\label{tab:problem5.9.20-Prof}
 \end{table}
 
-Table~\ref{tab:problem5.9.20-Prof} shows the number of tests required when using the professor's strategy.  Glass~\#1 represents the first glass tested, i.e.,~the one selected at random.  In the unlikely event that glass has the poison, no additional testing is required. In contrast, if the poison is in one of the other 128~glasses, seven tests (plus the additional one for the first glass) are required.  Using this strategy, the expected number of tests is:
+Table~\ref{tab:problem5.9.20-Prof} shows the number of tests required when using the professor's strategy.  Glass~\#1 represents the first glass tested, i.e.,~the one selected at random.  In the unlikely event that glass has the poison, no additional testing is required. In contrast, if the poison is in one of the other 128~glasses, seven tests (plus the additional one for the first glass) are required.  Using the professor's strategy, the expected number of tests is:
 
 \begin{aligncustom}
   \mathbb{E}(\text{Professor's Strategy}) &= \frac{1}{129} \cdot 1 + \frac{128}{129} \cdot 8 \\
@@ -42,7 +42,7 @@ In contrast, the optimal strategy is:
   \item\label{itm:testRemaining} If poison was never observed in any test, then test just the remaining glass not off to the side. If poison is detected, then the answer is clear, and the tested glass has poison; otherwise, the glass off to the side has the poison.
 \end{enumerate}
 
-Table~\ref{tab:problem5.9.20-Opt} shows the number of tests required using this optimum strategy.    Note that Glass~\#129 entails the remaining glass in step~\#\ref{itm:testRemaining} where no sample tests positive for poison up to the last remaining glass not off to the side.
+Table~\ref{tab:problem5.9.20-Opt} shows the number of tests required using this optimum strategy.    Note that Glass~\#129 represents the remaining glass in step~\#\ref{itm:testRemaining} where no sample tested positive for poison up to the last remaining glass not off to the side.
 
 \begin{table}[h]
   \centering
@@ -66,4 +66,4 @@ Using this optimum strategy, the expected number of tests is:
 
 It is clear then that the expected waste of the professor's strategy is \boxed{0.93} tests.
 
-Maximum compression of a symbol code is achieved by assigning shorter codes (i.e.,~with less bits) to outcomes with higher probability.  In contrast, the professor prioritized the least likely outcome by testing the randomly selected glass first.  The optimal strategy described above always tests the most likely outcome (i.e.,~more glasses at once) similar to how symbol codes are encoded.
+Maximum compression of a symbol code is achieved by assigning shorter codes (i.e.,~those with less bits) to outcomes with higher probability.  In contrast, the professor prioritized the least likely outcome by testing the randomly selected glass first.  The optimal strategy described above always tests the most likely outcome (i.e.,~more glasses at once) similar to how symbol codes are encoded.
