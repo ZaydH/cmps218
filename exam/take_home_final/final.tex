@@ -1,0 +1,117 @@
+\documentclass{report}
+
+\usepackage{fullpage}
+\usepackage[skip=4pt]{caption} % ``skip'' sets the spacing between the figure and the caption.
+\usepackage{tikz}
+\usepackage{pgfplots}   % Needed for plotting
+\pgfplotsset{compat=newest}
+\usepgfplotslibrary{fillbetween}  % Allow for highlighting under a curve
+\usepackage{amsmath}    % Allows for piecewise functions using the ``cases'' construct
+\newcommand{\abs}[1]{\lvert#1\rvert}%
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+%\usepackage{mathrsfs}   % Use the ``\mathscr'' command in an equation.
+\usepackage{siunitx}    % Allows for ``S'' alignment in table to align by decimal point
+\usepackage{enumitem}   % Reference enumerated item lists.
+
+\usepackage[obeyspaces,spaces]{url} % Used for typesetting with the ``path'' command
+\usepackage[hidelinks]{hyperref}   % Make the cross references clickable hyperlinks
+\usepackage[bottom]{footmisc} % Prevents the table going below the footnote
+\usepackage{nccmath}    % Needed in the workaround for the ``aligncustom'' environment
+\usepackage{amssymb}    % Used for black QED symbol
+\usepackage{bm}    % Allows for bolding math symbols.
+\usepackage{tabto}     % Allows to tab to certain point on a line
+\usepackage{float}
+
+\newcommand{\hangindentdistance}{1cm}
+\setlength{\parindent}{0pt}
+\setlength{\leftskip}{\hangindentdistance}
+\setlength{\hangafter}{1}
+\setlength{\parskip}{1em}
+
+
+% Set up page formatting
+\usepackage{todonotes}
+\usepackage{fancyhdr} % Used for every page footer and title.
+\pagestyle{fancy}
+\fancyhf{} % Clears both the header and footer
+\renewcommand{\headrulewidth}{0pt} % Eliminates line at the top of the page.
+\fancyfoot[LO]{CMPS218 \textendash\ Take Home Final} % Left
+\fancyfoot[CO]{\thepage} % Center
+\fancyfoot[RO]{Zayd Hammoudeh} %Right
+
+% Change interline spacing.
+\renewcommand{\baselinestretch}{1.1}
+\newenvironment{aligncustom}
+{ \csname align*\endcsname % Need to do this instead of \begin{align*} because of LaTeX bug.
+    \centering
+}
+{
+  \csname endalign*\endcsname
+}
+%--------------------------------------------------
+
+
+\title{\textbf{CMPS218 \textendash\ Take Home Final Exam}}
+\author{Zayd Hammoudeh}
+
+%---------------------------------------------------%
+% Define the Environments for the Problem Inclusion %
+%---------------------------------------------------%
+\newcounter{subProbCount}       % Initialize the subproblem counter
+\newcounter{problemCount}
+\setcounter{problemCount}{0} % Reset the subproblem counter
+\newenvironment{problemshell}{
+  \par%
+  \medskip
+  \leftskip=0pt\rightskip=0pt%
+}
+{
+  \par\medskip
+  \setcounter{subProbCount}{1} % Reset the subproblem counter
+}
+\newenvironment{problem}[3]
+{%
+  \begin{problemshell}
+    \noindent \textit{Chapter \##1, Exercise~\##2} \\
+    \bfseries
+}
+{
+  \end{problemshell}
+}
+\newenvironment{subproblem}
+{%
+  \par%
+  \medskip
+  \leftskip=0pt\rightskip=0pt%
+  \bfseries
+  % Print the subproblem count and offset to the left
+  (\alph{subProbCount}) \hangindent=\hangindentdistance \hangafter=1 \tabto{\hangindentdistance}
+}
+{
+  \stepcounter{subProbCount} % Increment the subproblem counter
+  \par\medskip
+}
+\newcommand{\problemspace}{\\[0.4em]}
+
+\begin{document}
+%  \maketitle
+
+  \textbf{Name}: Zayd Hammoudeh
+
+  \textbf{Assignment}:  CMPS218 Take Home Final Exam
+
+  \textbf{Other Student Discussions}: These problems were not discussed with any other students.
+
+  \textbf{Problem Assessments}: All problems are complete to the best of my understanding.
+
+  \include{p1}
+
+  \include{p2}
+
+  \include{p3}
+
+  \include{p4}
+
+\end{document}
+

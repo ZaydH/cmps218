@@ -1,0 +1,15 @@
+\newpage
+\begin{problem}{15}{5}
+  In a magic trick, there are three participants: the magician, an assistant, and a volunteer.  The assistant, who claims to have paranormal abilities, is in a soundproof room.  The magician gives the volunteer six blank cards, five white and one blue.  The volunteer writes a different integer from 1 to 100 on each card, as the magician is watching.  The volunteer keeps the blue card. The magician arranges the white cards in some order and passes them to the assistant. The assistant then announces the number on the blue card.
+  
+  How does this trick work?
+\end{problem}
+
+For the sake of making this problem meaningful, I am going to \textit{assume} the assistant does not actually have paranormal abilities.
+
+Consider a set of five unique, arbitrary integers.  We will represent these integers as $a$, $b$, $c$, $d$, and $e$.  Assign these five unique integers to these letters satisfying the relationship $a \leq b \leq c \leq d \leq e$.  At this point, forget what the original numbers were and only concentrate on the letters since it is only the letters that matter.  
+
+It is elementary to see that there are ${}_{5}P_{5} = 5! = 120$ permutations of five unique letters.  Assign to each permutation a unique number from 1 to 120.  This represents a unique decodable encoding of any number between 1 and 120.
+
+In this trick, the five unique integers swritten on the white cards are mapped to the letters $a$ through $e$ as described above.  The magician knows the number written on the blue card and encodes that number based on how he orders (permutes) the five white cards (letters) before passing them to the assistant.  The assistant then decodes this permutation to get the volunteer's number on the blue card completing the trick.
+
