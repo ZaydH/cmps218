@@ -3,11 +3,29 @@
 \end{problem}
 
 \begin{subproblem}
-  \textit{Estimate} how many weights are required by the optimal strategy.  And what if there are three odd balls.
+  \textit{Estimate} how many weights are required by the optimal strategy.  And what if there are three odd balls?
 \end{subproblem}
 
+  From a set of 12 balls, there are $\binom{12}{2}$ combinations of two ``odd'' balls.  Similarly, each ``odd'' ball can be either light or heavy.  Therefore, the number of unique solutions is: 
+  
+  \[ 2\cdot 2 \cdot \binom{12}{2} = 4 \cdot 66 = 264 \text{,} \]
+  
+  all of which are equally likely.  The three-outcome balance roughly reduces the set of possible solutions by two-thirds with each measurement.  A minimum expected number of weights for two odd balls is:
+  
+  \[ \ceil{\log_{3} 264} \approx \ceil{5.075} = 6 \text{.} \]
+  
+  Since 5.075 is too near to~6, there is still slack for imbalance in the probabilities of the respective outcomes of a ball weighing.  Therefore, I estimate \boxed{6} splits are required for two odd balls.
+
+  When there are three odd balls, then there are $\binom{12}{3}$ combinations of ``odd'' balls with each odd ball being either light or heavy, the number of unique (equally likely) solutions is:
+  
+  \[ 2^3 \cdot \binom{12}{3} = 8 \cdot 220 = 1760 \text{.} \]
+
+  As such, an initial estimate of the number of weights for three 
+
+  \[ \ceil{\log_{3} 1760} \approx \ceil{6.802} = 7 \text{.} \]
+
 \begin{subproblem}
-  How do your answers change if it is known that all the regular balls weigh 100g, that light balls weight 99g, and heavy ones weigh 110g.
+  How do your answers change if it is known that all the regular balls weigh 100g, that light balls weight 99g, and heavy ones weigh 110g?
 \end{subproblem}
 
 
