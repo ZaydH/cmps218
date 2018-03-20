@@ -1,18 +1,15 @@
-\newpage
 \begin{problem}{15}{6}
   How does \textit{this} trick work?
-  
+
   \textnormal{\textit{`Here's an ordinary pack of cards shuffled into random order.  Please choose five cards from the pack, any you wish. Don't let me see their faces. No, don't give them to me: pass them to my assistant Esmerelda.  She can look at them.}}
-  
+
   \textnormal{\textit{`Now, Esmerelda, show me four of the cards.  Hmm...nine of spades, six of clubs, four of hearts, ten of diamonds. The hidden card must be the queen of spades.}}
-  
+
   This trick can be performed as described above for a pack of 52 cards.  Use information theory to give an upper bound on the number of cards for which the trick can be performed.
 \end{problem}
 
-Consider a collection of $n$~unique objects.  It is trivial to bijectively map this aforementioned set to the integers $\{1,\ldots,n\}$. If five items are selected of which four are revealed, then the previous problem's trick would allow us to communicate the fifth object as long as $n$~is less than or equal to ${4! + 4 = 28}$.  Given a standard deck contains $n=52$ cards, the number of permutations is insufficient to uniquely encode the hidden card.  Therefore, we need a more creative encoding....
+Consider a collection of $n$~unique objects.  It is trivial to bijectively map these objects to the integers $\{1,\ldots,n\}$. If five integers from the set are selected of which four are revealed, then the previous problem's trick would allow us to communicate the fifth object as long as $n$~is less than or equal to ${4! + 4 = 28}$.  Given a standard deck contains $n=52$ cards, the number of permutations is insufficient to uniquely encode the hidden card.  Therefore, we need a more creative encoding....
 
-The problem states that Esmerelda ``shows'' the magician four of the cards.  Through slight of hand and other common magician trickery, Esmerelda could transmit large amounts of data during the act of ``showing.''  For example, information could be conveyed to the magician based on how Esmerelda orients the cards as she shows them (e.g.,~horizontally, diagonally rising, diagonally falling, etc.) or by showing (or not) the back of each card before revealing the face, etc.  I ignore those possibilities since they are largely uninteresting, and I expect they were not what Mackay had in mind.
-
-The key to this problem is that Esmerelda chose which of the five cards will remain hidden.  If she chose that card randomly, we are back to the 24~permutations mentioned previously.  However, Esmerelda was more cunning and chose a specific card from the set.  A scheme could be developed that increases the upper bound on the amount of encodable objects five fold based on which card she chooses.  Therefore, the upper bound on the number of objects that can be uniquely encoded is~${5\cdot24=120}$.  The maximum deck size which includes both the ``unknown objects pool'' and the four revealed cards~${4 + 120 = \boxed{124}}$.
+The key to this problem is that Esmerelda \textit{chose} which of the five cards will remain hidden.  If she chose that card randomly, we are back to 24~permutations.  However, Esmerelda was more cunning and chose a \textit{specific} card to remain hidden.  A scheme could be developed that uses this selection process to increase the upper bound on the number of encodable objects fivefold i.e.,~once for each card the volunteer chose.  When we combine that with the trick from the previous problem, we see that the maximum number of objects that can be uniquely encoded is now~${5\cdot4!=120}$.  Therefore, combining the maximum size of the encoded objects pool with the four cards revealed, we see the upper bound for the maximum deck size is~${4 + 120 = \boxed{124}}$.
 
 The problem does not require that we prove the upper bound is the true bound.  However, after completing the problem, I did research online and found that this is in fact the true bound.
