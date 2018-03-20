@@ -3,5 +3,14 @@
   Write a short essay describing how to play the game of twenty questions optimally.  \textnormal{[In twenty questions, one player thinks of an object, and the other player has to guess the object using as few binary question as possible, preferably fewer than twenty.]}
 \end{problem}
 
+The na\"ive approach to answering this question is as follows:
 
+\textit{There is a finite set of candidates,~$C$, from which the first player will select the object.  With each question, reduce the size of this set of possible objects by half.}
 
+This strategy overlooks one key detail -- each object in $C$ does not have equal likelihood of selection.  What is more, the likelihood of selection for each object varies based on the specific person doing the selection!  For example, I am more likely to select my cat as the object than you are (whoever is reading this).
+
+\textbf{A Better Strategy}:
+
+For each $c \in C$, the ``other'' player should define a probability which represents the likelihood that the first player would select $c$. As in the na\"ive strategy, the set of possible candidates shrinks with each question.  However, rather than reducing the size of the candidate pool in half each time, the question posed should partition that pool such that the probability of all candidates that remain valid if the answer is ``no'' has \textbf{equal probability} to the set of candidates that remain if the answer is ``yes.''  This approach maximizes the expected information content of each answer.
+
+Once one remaining possible object,~$c$, has greater probability than all other remaining objects combined, the ``other'' player should ask ``Is your object~$c$?''
