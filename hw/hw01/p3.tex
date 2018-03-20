@@ -23,4 +23,4 @@ where the total responsibility, $R^{(k)}$, for cluster $k$ is:
 
 \[ R^{(k)}=\sum_{n} r_{k}^{(n)} \text{.} \]
 
-As mentioned previously, small differences in the distance,~$d$, cause huge differences in the responsibility,~$r$, when $\beta$ approaches infinity.  In hard K-means, it was possible for a cluster to be assigned no points.  However, in soft K-Means, such clusters still have \textit{some} responsibility for every point, albeit infinitesimally small when $\beta$ approaches infinity.  In that case, those means will move to the \textit{location of the point,~$\textnormal{\textbf{x}}^{(n)}$, nearest to that mean}.
+As mentioned previously, small differences in the distance,~$d$, cause huge differences in the responsibility,~$r$, when $\beta$ approaches infinity.  In hard K-means, it was possible for a cluster to be assigned no points.  However, in soft K-Means, such clusters still have \textit{some} responsibility for every point, albeit infinitesimally small when $\beta$ approaches infinity.  In that case, those means will move to the \textit{location of the point with the highest responsibility, which may not necessarily be the closest to that mean}.
