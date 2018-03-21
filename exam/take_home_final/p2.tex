@@ -5,10 +5,14 @@
 
 The na\"ive approach to answering this question is as follows:
 
-\textit{There is a finite set of candidates,~$C$, from which the first player will select the object.  With each question, reduce the size of this set of possible objects by half.}
+\begin{addmargin}[0.5in]{0.5in}
+  \textit{There is a finite set of candidates,~$C$, from which the first player will select the object.  With each question, reduce the size of this set of possible objects by half.}
+\end{addmargin}
 
+\noindent
 This strategy overlooks one key detail -- each object in $C$ does not have equal likelihood of selection.  What is more, the likelihood of selection for each object varies based on the specific person doing the selection!  For example, I am more likely to select my cat as the object than you are (whoever is reading this).
 
+\noindent
 \textbf{A Better Strategy}:
 
 For each $c \in C$, the ``other'' player should define a probability which represents the likelihood that the first player would select $c$. As in the na\"ive strategy, the set of possible candidates shrinks with each question.  However, rather than reducing the size of the candidate pool in half each time, the question posed should partition that pool such that the probability of all candidates that remain valid if the answer is ``no'' has \textbf{equal probability} to the set of candidates that remain if the answer is ``yes.''  This approach maximizes the expected information content of each answer.

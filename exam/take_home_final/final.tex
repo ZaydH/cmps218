@@ -24,10 +24,12 @@
 \usepackage{float}
 
 \newcommand{\hangindentdistance}{1cm}
-\setlength{\parindent}{0pt}
-\setlength{\leftskip}{\hangindentdistance}
-\setlength{\hangafter}{1}
+\newcommand{\defaultleftmargin}{0.25in}
+\newcommand{\questionleftmargin}{-.5in}
+%\setlength{\parindent}{0pt}
 \setlength{\parskip}{1em}
+\setlength{\oddsidemargin}{\defaultleftmargin}
+\usepackage{scrextend}
 
 
 % Set up page formatting
@@ -62,44 +64,45 @@
 \newcounter{problemCount}
 \setcounter{problemCount}{0} % Reset the subproblem counter
 \newenvironment{problemshell}{
-  \par%
-  \medskip
-  \leftskip=0pt\rightskip=0pt%
+  \begin{addmargin}[\questionleftmargin]{0em}
+    \par%
+    \medskip
+    \leftskip=0pt\rightskip=0pt%
+    \setlength{\parindent}{0pt}
+    \bfseries
 }
 {
-  \par\medskip
-  \setcounter{subProbCount}{1} % Reset the subproblem counter
+    \par\medskip
+  \end{addmargin}
 }
 \newenvironment{problem}[2]
 {%
   \begin{problemshell}
     \noindent \textit{Chapter \##1, Exercise~\##2} \\
-    \bfseries
 }
 {
   \end{problemshell}
+  \setcounter{subProbCount}{1} % Reset the subproblem counter
 }
 \newenvironment{subproblem}
 {%
-  \par%
-  \medskip
-  \leftskip=0pt\rightskip=0pt%
-  \bfseries
-  % Print the subproblem count and offset to the left
-  (\alph{subProbCount}) \hangindent=\hangindentdistance \hangafter=1 \tabto{\hangindentdistance}
+  \begin{problemshell}
+    \setlength{\leftskip}{\hangindentdistance}
+    % Print the subproblem count and offset to the left
+    \hspace{-\hangindentdistance}(\alph{subProbCount}) \tabto{0pt}
 }
 {
-  \stepcounter{subProbCount} % Increment the subproblem counter
-  \par\medskip
+    \stepcounter{subProbCount} % Increment the subproblem counter
+  \end{problemshell}
 }
-\newcommand{\problemspace}{\\[0.4em]}
+
 
 \begin{document}
 %  \maketitle
-
+%
   \textbf{Name}: Zayd Hammoudeh
 
-  \textbf{Assignment}:  CMPS218 Take Home Final Exam
+  \textbf{Assignment}: CMPS218 Take Home Final Exam
 
   \textbf{Other Student Discussions}: These problems were not discussed with any other students.
 

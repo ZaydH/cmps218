@@ -2,14 +2,35 @@
   You are given 12 balls and the three-outcome balance of exercise 4.1; this time, two of the balls are odd; each odd ball may be heavy or light, and we don't know which.  We want to identify the odd balls and in which direction they are odd.
 \end{problem}
 
+
+
 \begin{subproblem}
   \textit{Estimate} how many weights are required by the optimal strategy.  And what if there are three odd balls?
 \end{subproblem}
+
+  When there was only the possibility of a single ``odd'' ball, there were six possible scenarios for the experiment namely:
+  
+  \begin{itemize}[wide]
+    \item The odd ball \textit{light} and on the \textit{right side} of the balance causing the right side to \textbf{rise}.
+    \item The odd ball \textit{light} and on the \textit{left side} of the balance causing the left side to \textbf{rise}.
+    
+    \item The odd ball \textit{heavy} and on the \textit{right side} of the balance causing the right side to \textbf{sink}.
+    \item The odd ball \textit{heavy} and on the \textit{left side} of the balance causing the left side to \textbf{sink}.
+    
+    \item The odd ball \textit{light} but off to the side so the balance is \textbf{level}.
+    \item The odd ball \textit{heavy} but off to the side so the balance is \textbf{level}.
+  \end{itemize}
+
+  \noindent
+  Each case had \textit{roughly} equivalent probability making the maximum required number of weights ${\ceil{\log_{3} 24}=3}$.
+  
+  Now consider when there are two odd balls.  There are substantially more possible outcomes.  Likewise, since the relative weights of the light and heavy balls is unknown, there is also some ambiguity con
 
   From a set of 12 balls, there are $\binom{12}{2}$ combinations of two ``odd'' balls.  Similarly, each ``odd'' ball can be either light or heavy.  Therefore, the number of unique solutions is:
 
   \[ 2\cdot 2 \cdot \binom{12}{2} = 4 \cdot 66 = 264 \text{,} \]
 
+  \noindent
   all of which are equally likely.  Ideally, the three-outcome balance roughly reduces the set of possible solutions by two-thirds with each measurement.  A best case expected number of weights for two odd balls is:
 
   \[ \log_{3} 264\approx 5.075 {.} \]
@@ -20,10 +41,12 @@
 
   \[ 2^3 \cdot \binom{12}{3} = 8 \cdot 220 = 1760 \text{.} \]
 
+  \noindent
   As such, the minimum expected number of weightings for three odd balls is:
 
   \[ \log_{3} 1760 \approx 6.802 \text{.} \]
 
+  \noindent
   Unfortunately, $6.802$ is close to $7$ leaving less slack for any imbalance in the outcome probabilities.  For that reason, I estimate the expected number of weights for three balls is \boxed{7 \text{ or } 8}.
 
 \begin{subproblem}
