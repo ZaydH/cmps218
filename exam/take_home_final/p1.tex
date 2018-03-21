@@ -12,7 +12,7 @@
   
   \begin{table}[H]
     \centering
-    \caption{Three-outcome balance position for a \\single odd ball that is light or heavy Ball}\label{tab:p1OneBallTable}
+    \caption{Three-outcome balance position for a \\single odd ball that is light or heavy ball}\label{tab:p1OneBallTable}
     \begin{tabular}{|c||c|c||c|}
       \hline
       \multirow{2}{*}{Case~\#} &  \multicolumn{2}{c||}{Odd Ball} & Balance\\\cline{2-3}
@@ -73,9 +73,26 @@
       32  &  Heavy   &  Neither  &  Heavy   &  Neither  &  $-|-$ \\ \hline\hline
 
       33  &  Light   &  Left     &  Heavy   &  Left    &  \textbf{Unknown} \\ \hline
-      34  &  Heavy   &  Left     &  Light   &  Right   &  \textbf{Unknown} \\ \hline
+      34  &  Heavy   &  Left     &  Right   &  Left    &  \textbf{Unknown} \\ \hline
       35  &  Light   &  Right    &  Heavy   &  Right   &  \textbf{Unknown} \\ \hline
-      36  &  Heavy   &  Right    &  Light   &  Left    &  \textbf{Unknown} \\ \hline
+      36  &  Heavy   &  Right    &  Light   &  Right   &  \textbf{Unknown} \\ \hline
+    \end{tabular}
+  \end{table}
+  
+  When there are three odd balls, the uncertainty increases further.  First, the hypothesis class grows from~$264$ to~${2\cdot2\cdot2\cdot\binom{12}{3} = 1,760}$.  Next, the table of cases (not included) grows from~$36$ to~$216$.  Furthermore, the cases where the balance output would correspond to ``Unknown'' grows from~$4$ to~$24$ as shown in Table~\ref{tab:p1ThreeBallsUnknownWeights}.
+  
+  \begin{table}[H]
+    \centering
+    \caption{Three odd ball cases where the balance position is unknown if ball weights are not provided where an ``X'' corresponds to ``do not care''}\label{tab:p1ThreeBallsUnknownWeights}
+    \begin{tabular}{|c||c|c||c|c||c|c||}
+      \hline
+      \multirow{2}{*}{Case~\#} & \multicolumn{2}{c||}{Odd Ball~\#A} & \multicolumn{2}{c||}{Odd Ball~\#B} & \multicolumn{2}{c||}{Odd Ball~\#C}\\\cline{2-7}
+          &  Weight  &  Location &  Weight  &  Location &  Weight  &  Location  \\ \hline\hline
+      
+      1--6   &  Light &  Left  &  Heavy &  Left  &  X &  X   \\ \hline
+      7--12  &  Heavy &  Left  &  Light &  Left  &  X &  X   \\ \hline
+      13--18 &  Light &  Right &  Heavy &  Right &  X &  X   \\ \hline
+      19--24 &  Heavy &  Right &  Light &  Right &  X &  X   \\ \hline
     \end{tabular}
   \end{table}
   
@@ -108,4 +125,4 @@
   How do your answers change if it is known that all the regular balls weigh 100g, that light balls weight 99g, and heavy ones weigh 110g?
 \end{subproblem}
 
-  As mentioned previously, in the multi-oddball case, uncertainty about the relative weights of the balls necessitates that additional measurements be made to clarify that uncertainty.  If the relative and absolute weight of the balls is known, the Cases~\#33-34 and Cases~\#35-36 in Table~\ref{tab:p1TwoBallsUnknownWeights} are assigned to ``${\bar{~}\bar{~}|\underline{~~}}$'' and ``${\underline{~~}|\bar{~}\bar{~}}$'' respectively.
+  As mentioned previously, in the multi-oddball case, uncertainty about the relative weights of the balls necessitates that additional measurements be made to clarify that uncertainty.  Now that the relative ball weights are known, the Cases~\#33-34 and Cases~\#35-36 in Table~\ref{tab:p1TwoBallsUnknownWeights} are assigned to ``${\underline{~~}|\bar{~}\bar{~}}$'' and ``${\bar{~}\bar{~}|\underline{~~}}$'' respectively.

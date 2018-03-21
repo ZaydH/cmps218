@@ -10,8 +10,16 @@
   This trick can be performed as described above for a pack of 52 cards.  Use information theory to give an upper bound on the number of cards for which the trick can be performed.
 \end{problem}
 
-Consider a collection of $n$~unique objects.  It is trivial to bijectively map these objects to the integers $\{1,\ldots,n\}$. If five integers from the set are selected of which four are revealed, then the previous problem's trick would allow us to communicate the fifth object as long as $n$~is less than or equal to ${4! + 4 = 28}$.  Given a standard deck contains $n=52$ cards, the number of permutations is insufficient to uniquely encode the hidden card.  Therefore, we need a more creative encoding....
+\noindent
+\textit{Assumption}:
 
-The key to this problem is that Esmerelda \textit{chose} which of the five cards will remain hidden.  If she chose that card randomly, we are back to 24~permutations.  However, Esmerelda was more cunning and chose a \textit{specific} card to remain hidden.  A scheme could be developed that uses this selection process to increase the upper bound on the number of encodable objects fivefold i.e.,~once for each card the volunteer chose.  When we combine that with the trick from the previous problem, we see that the maximum number of objects that can be uniquely encoded is now~${5\cdot4!=120}$.  Therefore, combining the maximum size of the encoded objects pool with the four cards revealed, we see the upper bound for the maximum deck size is~${4 + 120 = \boxed{124}}$.
+To make this problem more meaningful, I am going to assume that when Esmerelda ``shows'' the four cards to the magician, she is not using any sleight of hand trickery to relay additional information to the magician (e.g., orient the cards in her hand in a certain way, show the face or backside first, etc.).  Essentially, I consider that the magician is only provided numbers from a black box.
 
-The problem does not require that we prove the upper bound is the true bound.  However, after completing the problem, I did research online and found that this is in fact the true bound.
+\noindent
+\textit{Answer}:
+
+Consider a collection of $n$~unique objects.  It is trivial to bijectively map these objects to the integers $\{1,\ldots,n\}$. If five integers from the set are selected of which four are revealed, then the previous problem's trick allows us to communicate the fifth object as long as $n$~is less than or equal to ${4! + 4 = 28}$.  Given a standard deck contains ${n=52}$ cards, the number of permutations is insufficient to uniquely encode the hidden card.  Therefore, we need a more creative encoding....
+
+The key to this problem is that Esmerelda \textit{chose} which of the five cards remained hidden.  If she chose that card randomly, we are back to 24~permutations.  However, Esmerelda was more cunning and chose a \textit{specific} card to remain hidden.  A scheme could be developed that uses this selection process to increase the upper bound on the number of encodable objects fivefold i.e.,~once for each card she could have chosen.  When we combine that knowledge with the technique from the last question (exercise~15.5), we see that the maximum number of objects that can be uniquely encoded is~${5\cdot4!=120}$.  Therefore, combining the maximum size of the encodable objects pool with the four cards Esmerelda revealed, we see the upper bound for the maximum deck size is~${4 + 120 = \boxed{124}}$.
+
+The problem does not require that we prove the tightness of this upper bound.  However, after completing the problem, I did research online and found that this is in fact the true bound.  What is more, the technique described above is not how this trick (known as the ``Fitch Cheney Card Trick'') is traditionally performed; that approach to the trick has a maximum deck size of~52.
