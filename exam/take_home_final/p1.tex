@@ -2,21 +2,24 @@
   You are given 12 balls and the three-outcome balance of exercise 4.1; this time, two of the balls are odd; each odd ball may be heavy or light, and we don't know which.  We want to identify the odd balls and in which direction they are odd.
 \end{problem}
 
-
-
-\begin{subproblem}
-  \textit{Estimate} how many weights are required by the optimal strategy.  And what if there are three odd balls?
-\end{subproblem}
-
-  When there was a single odd ball out of twelve, the size of the hypothesis class was ${2 * \binom{12}{1} = 24}$.  To determine the number of weights required to determine the actual solution, we need to consider how each hypothesis would be represented on the balance.  The six possibilities are shown in Table~\ref{tab:p1OneBallTable}.  As enumerated in Figure~4.2 of Mackay's text, we see that balance output has \textit{roughly} equivalent probability making the number of required weights ${\ceil{\log_{3} 24}=3}$.
+  When there is a single odd ball out of twelve, the cardinality of the hypothesis class,~$\mathcal{H}$, was ${2 * \binom{12}{1} = 24}$.  To determine the number of weights required to determine the actual solution, we need to consider how each hypothesis would be represented on the balance.  The six possibilities are shown in Table~\ref{tab:p1OneBallTable}.  As enumerated in Figure~4.2 of Mackay's text, we see that the balance output partitions the set of possible outcomes roughly by equivalent probability. We can estimate the number of weighings required using Eq~\eref{eq:p1NumbWeightsRequired}.
   
+  \begin{equation}\label{eq:p1NumbWeightsRequired}
+    \#\text{Weights Required} \approx \ceil{\log_{H} \abs{\mathcal{H}} }
+  \end{equation}
+  
+  \noindent
+  Note that $H$ is the entropy of the balance result and 
+  
+   output has \textit{roughly} equivalent probability making the number of required weights ${\ceil{\log_{3} 24} \approx \ceil{2.893} = 3}$.
+
   \begin{table}[H]
     \centering
     \caption{Three-outcome balance position for a \\single odd ball that is light or heavy ball}\label{tab:p1OneBallTable}
     \begin{tabular}{|c||c|c||c|}
       \hline
       \multirow{2}{*}{Case~\#} &  \multicolumn{2}{c||}{Odd Ball} & Balance\\\cline{2-3}
-          &  Weight  &  Location &  Position  \\ \hline\hline
+      &  Weight  &  Location &  Position  \\ \hline\hline
       1   &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
       2   &  Heavy   &  Right    &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline\hline
       3   &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
@@ -26,56 +29,79 @@
     \end{tabular}
   \end{table}
 
+
+\begin{subproblem}
+  \textit{Estimate} how many weights are required by the optimal strategy.  And what if there are three odd balls?
+\end{subproblem}
+
+
+
   \noindent
   
-  The situation grows significantly more complex when there are three balls.  For example, the size of the hypothesis class grows by more than an order of magnitude from~$24$ to ${2\cdot2\cdot\binom{12}{2} = 264}.$ In addition, interpreting the results of the balance also becomes more complex as shown in Table~\ref{tab:p1TwoBallsUnknownWeights}.  Note first that the possible cases has increased six-fold from~6 to~36.  Furthermore, as part of the problem, we are not provided any information about the relative or absolute weights of the balls.  Therefore, we do not know if for example a heavy ball cancels out a light ball.  Such additional uncertainty necessitates that we collect more require more weights to achieve certainty.
+  The situation grows significantly more complex when there are three balls.  For example, the size of the hypothesis class grows by more than an order of magnitude from~$24$ to ${2\cdot2\cdot\binom{12}{2} = 264}.$ In addition, interpreting the results of the balance also becomes more complex as shown in Table~\ref{tab:p1TwoBallsUnknownWeights}.  Note first that the possible cases has increased six-fold from~6 to~36.  Furthermore, the problem does not provide any information about the relative weights of a normal, light or heavy ball.  This prevents us from drawing conclusions about the balance's behavior when there are mismatched balls on the side side, e.g.,~whether a light and heavy ball equals the weight of two normal balls.  Such additional uncertainty necessitates that we collect more require more weights to achieve certainty.
+  
+  When there are two odd balls, the lower bound for the number of weights is:
+  
+  \[ \ceil{\log_3 264} \approx \ceil{5.064} = 6\text{.} \]
+  
+  A more accurate estimation of the number of weights is found by calculating the entropy of the each possible outcome in Table~\ref{}.  First, I calculated the probabilities of $P_{1}$ and $P_{2}$ which are $\frac{3}{154}$ and $\frac{4}{121}$ respectively.  Using that information, you can calculate the breakdown for the four balance positions; that is shown in Table~\ref{tab:twoBallProbabilityBreakdown}.  Using this data, we see that the entropy of the balance is~$1.821$.
   
   \begin{table}[H]
     \centering
     \caption{Three-outcome balance position for two\\odd balls that are light and/or heavy Ball}\label{tab:p1TwoBallsUnknownWeights}
-    \begin{tabular}{|c||c|c||c|c||c|}
+    \begin{tabular}{|c||c|c||c|c||c||c|}
       \hline
-      \multirow{2}{*}{Case~\#} & \multicolumn{2}{c||}{Odd Ball~\#1} &  \multicolumn{2}{c||}{Odd Ball~\#2} & Balance\\\cline{2-5}
-          &  Weight  &  Location &  Weight  &  Location &  Position  \\ \hline\hline
-      1   &  Light   &  Left     &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      2   &  Light   &  Left     &  Light   &  Neither  &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      3   &  Light   &  Left     &  Heavy   &  Neither  &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      4   &  Light   &  Neither  &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      5   &  Heavy   &  Neither  &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      6   &  Heavy   &  Right    &  Heavy   &  Right    &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      7   &  Heavy   &  Right    &  Light   &  Neither  &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      8   &  Heavy   &  Right    &  Heavy   &  Neither  &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      9   &  Light   &  Neither  &  Heavy   &  Right    &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      10  &  Heavy   &  Neither  &  Heavy   &  Right    &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      11  &  Light   &  Right    &  Heavy   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline
-      12  &  Heavy   &  Left     &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ \\ \hline\hline
+      \multirow{2}{*}{Case~\#} & \multicolumn{2}{c||}{Odd Ball~\#1} &  \multicolumn{2}{c||}{Odd Ball~\#2} & Balance & \multirow{2}{*}{$\Pr$}\\\cline{2-5}
+          &  Weight  &  Location &  Weight  &  Location &  Position                        &         \\ \hline\hline
+      1   &  Light   &  Left     &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{1}$ \\ \hline
+      2   &  Light   &  Left     &  Light   &  Neither  &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      3   &  Light   &  Left     &  Heavy   &  Neither  &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      4   &  Light   &  Neither  &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      5   &  Heavy   &  Neither  &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      6   &  Heavy   &  Right    &  Heavy   &  Right    &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{1}$ \\ \hline
+      7   &  Heavy   &  Right    &  Light   &  Neither  &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      8   &  Heavy   &  Right    &  Heavy   &  Neither  &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      9   &  Light   &  Neither  &  Heavy   &  Right    &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      10  &  Heavy   &  Neither  &  Heavy   &  Right    &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      11  &  Light   &  Right    &  Heavy   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{2}$ \\ \hline
+      12  &  Heavy   &  Left     &  Light   &  Left     &  $\bar{~}\bar{~}|\underline{~~}$ & $P_{1}$ \\ \hline\hline
          
-      13  &  Light   &  Right    &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      14  &  Light   &  Right    &  Light   &  Neither  &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      15  &  Light   &  Right    &  Heavy   &  Neither  &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      16  &  Light   &  Neither  &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      17  &  Heavy   &  Neither  &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      18  &  Heavy   &  Left     &  Heavy   &  Left     &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      19  &  Heavy   &  Left     &  Light   &  Neither  &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      20  &  Heavy   &  Left     &  Heavy   &  Neither  &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      21  &  Light   &  Neither  &  Heavy   &  Left     &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      22  &  Heavy   &  Neither  &  Heavy   &  Left     &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      23  &  Light   &  Left     &  Heavy   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline
-      34  &  Heavy   &  Right    &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ \\ \hline\hline
+      13  &  Light   &  Right    &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{1}$ \\ \hline
+      14  &  Light   &  Right    &  Light   &  Neither  &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$ \\ \hline
+      15  &  Light   &  Right    &  Heavy   &  Neither  &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$ \\ \hline
+      16  &  Light   &  Neither  &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$ \\ \hline
+      17  &  Heavy   &  Neither  &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$ \\ \hline
+      18  &  Heavy   &  Left     &  Heavy   &  Left     &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{1}$ \\ \hline
+      19  &  Heavy   &  Left     &  Light   &  Neither  &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$ \\ \hline
+      20  &  Heavy   &  Left     &  Heavy   &  Neither  &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$ \\ \hline
+      21  &  Light   &  Neither  &  Heavy   &  Left     &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$ \\ \hline
+      22  &  Heavy   &  Neither  &  Heavy   &  Left     &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$ \\ \hline
+      23  &  Light   &  Left     &  Heavy   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{2}$  \\ \hline
+      34  &  Heavy   &  Right    &  Light   &  Right    &  $\underline{~~}|\bar{~}\bar{~}$ & $P_{1}$ \\ \hline\hline
 
-      25  &  Light   &  Right    &  Light   &  Left     &  $-|-$ \\ \hline
-      26  &  Light   &  Left     &  Light   &  Right    &  $-|-$ \\ \hline
-      27  &  Heavy   &  Right    &  Heavy   &  Left     &  $-|-$ \\ \hline
-      28  &  Heavy   &  Left     &  Heavy   &  Right    &  $-|-$ \\ \hline
-      29  &  Light   &  Neither  &  Light   &  Neither  &  $-|-$ \\ \hline
-      30  &  Light   &  Neither  &  Heavy   &  Neither  &  $-|-$ \\ \hline
-      31  &  Heavy   &  Neither  &  Light   &  Neither  &  $-|-$ \\ \hline
-      32  &  Heavy   &  Neither  &  Heavy   &  Neither  &  $-|-$ \\ \hline\hline
+      25  &  Light   &  Right    &  Light   &  Left     &  $-|-$ & $P_{2}$ \\ \hline
+      26  &  Light   &  Left     &  Light   &  Right    &  $-|-$ & $P_{2}$ \\ \hline
+      27  &  Heavy   &  Right    &  Heavy   &  Left     &  $-|-$ & $P_{2}$ \\ \hline
+      28  &  Heavy   &  Left     &  Heavy   &  Right    &  $-|-$ & $P_{2}$ \\ \hline
+      29  &  Light   &  Neither  &  Light   &  Neither  &  $-|-$ & $P_{1}$ \\ \hline
+      30  &  Light   &  Neither  &  Heavy   &  Neither  &  $-|-$ & $P_{1}$ \\ \hline
+      31  &  Heavy   &  Neither  &  Light   &  Neither  &  $-|-$ & $P_{1}$ \\ \hline
+      32  &  Heavy   &  Neither  &  Heavy   &  Neither  &  $-|-$ & $P_{1}$ \\ \hline\hline
 
-      33  &  Light   &  Left     &  Heavy   &  Left    &  \textbf{Unknown} \\ \hline
-      34  &  Heavy   &  Left     &  Right   &  Left    &  \textbf{Unknown} \\ \hline
-      35  &  Light   &  Right    &  Heavy   &  Right   &  \textbf{Unknown} \\ \hline
-      36  &  Heavy   &  Right    &  Light   &  Right   &  \textbf{Unknown} \\ \hline
+      33  &  Light   &  Left     &  Heavy   &  Left    &  \textbf{Unknown} & $P_{1}$ \\ \hline
+      34  &  Heavy   &  Left     &  Right   &  Left    &  \textbf{Unknown} & $P_{1}$ \\ \hline
+      35  &  Light   &  Right    &  Heavy   &  Right   &  \textbf{Unknown} & $P_{1}$ \\ \hline
+      36  &  Heavy   &  Right    &  Light   &  Right   &  \textbf{Unknown} & $P_{1}$ \\ \hline
+    \end{tabular}
+  \end{table}
+
+  \begin{table}
+    \centering
+    \caption{Probability of Two Odd Ball Cases by Balance Outcome}\label{tab:twoBallProbabilityBreakdown}
+    \begin{tabular}{|c||c|c|c|c|}
+      \hline
+      Balance Position & $\bar{~}\bar{~}|\underline{~~}$  & $\underline{~~}|\bar{~}\bar{~}$  & $-|-$ & Unknown \\\hline
+      Probability      & $\frac{603}{1694} \approx 0.356$ & $\frac{603}{1694} \approx 0.356$ & $\frac{178}{847} \approx 0.210$ & $\frac{12}{154} \approx 0.078$    \\\hline
     \end{tabular}
   \end{table}
   
@@ -84,9 +110,9 @@
   \begin{table}[H]
     \centering
     \caption{Three odd ball cases where the balance position is unknown if ball weights are not provided where an ``X'' corresponds to ``do not care''}\label{tab:p1ThreeBallsUnknownWeights}
-    \begin{tabular}{|c||c|c||c|c||c|c||}
+    \begin{tabular}{|c||c|c||c|c||c|c|}
       \hline
-      \multirow{2}{*}{Case~\#} & \multicolumn{2}{c||}{Odd Ball~\#A} & \multicolumn{2}{c||}{Odd Ball~\#B} & \multicolumn{2}{c||}{Odd Ball~\#C}\\\cline{2-7}
+      \multirow{2}{*}{Case~\#} & \multicolumn{2}{c||}{Odd Ball~\#A} & \multicolumn{2}{c||}{Odd Ball~\#B} & \multicolumn{2}{c|}{Odd Ball~\#C}\\\cline{2-7}
           &  Weight  &  Location &  Weight  &  Location &  Weight  &  Location  \\ \hline\hline
       
       1--6   &  Light &  Left  &  Heavy &  Left  &  X &  X   \\ \hline
