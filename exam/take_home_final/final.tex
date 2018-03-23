@@ -8,8 +8,9 @@
 \usepgfplotslibrary{fillbetween}  % Allow for highlighting under a curve
 \usepackage{amsmath}    % Allows for piecewise functions using the ``cases'' construct
 \newcommand{\abs}[1]{\lvert#1\rvert}%
-\newcommand{\ceil}[1]{\lceil #1 \rceil}
-\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\usepackage{mathtools} % for "\DeclarePairedDelimiter" macro
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
 %\usepackage{mathrsfs}   % Use the ``\mathscr'' command in an equation.
 \usepackage{siunitx}    % Allows for ``S'' alignment in table to align by decimal point
 \usepackage{enumitem}   % Reference enumerated item lists.
