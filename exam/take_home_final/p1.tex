@@ -2,16 +2,36 @@
   You are given 12 balls and the three-outcome balance of exercise 4.1; this time, two of the balls are odd; each odd ball may be heavy or light, and we don't know which.  We want to identify the odd balls and in which direction they are odd.
 \end{problem}
 
-  The hypothesis class~$\mathcal{H}$ is the set of all valid allocations of odd ball(s) in the problem. The number of weights required to determine the correct hypothesis,~$h\in\mathcal{H}$ can be estimated using the equation:
+  \noindent
+  \textit{Assumptions}:
+
+  \begin{itemize}
+    \item The problem states, ``each odd ball may be heavy or light.''  I interpret this to mean that if that all heavy odd balls have equivalent weight.  Similarly, all light odd balls have equivalent weight.
+  \end{itemize}
+
+  \noindent
+  \textit{Answer}:
+
+  The hypothesis class,~$\mathcal{H}$, is the set of all valid allocations of odd ball(s) in the problem. The number of weights required to determine the correct hypothesis,~$h\in\mathcal{H}$ can be estimated using the equation:
 
   \begin{equation}\label{eq:p1NumbWeightsRequired}
-    \#\text{Weights Required} \approx \ceil*{\frac{\log_{2} \abs{\mathcal{H}}}{H}} \text{,}
+    \mathbb{E}\left[\#\text{Weights Required}\right] \approx \ceil*{\frac{\log_{2} \abs{\mathcal{H}}}{H}} \text{,}
   \end{equation}
 
   \noindent
-  where $H$ is the balance outcomes' binary entropy.  The logic for this formula is quite intuitive. Representing each element in~$\mathcal{H}$ requires ${\log_{2}\mathcal{H}}$~bits.  Binary entropy is the \textit{expected} information gain per weighing (in bits).  Dividing the two yields the \textit{expected number of weights}.
+  where $H$ is the balance outcomes' binary entropy.  The logic for this formula is quite intuitive. Representing each element in~$\mathcal{H}$ requires ${\log_{2}\abs{\mathcal{H}}}$~bits.  Binary entropy is the \textit{expected} information gain per weighing (in bits).  Dividing the two yields the \textit{expected number of weights}.
 
-  When there is a single odd ball out of twelve, the cardinality of the hypothesis class,~$\abs{\mathcal{H}}$, is ${2 * \binom{12}{1} = 24}$. Each outcome of the balance partitions~$\mathcal{H}$ into subsets of roughly equal probability. This is illustrated in Table~\ref{tab:p1OneBallTable} which shows the correspondence between odd ball balance location and the outcome. Using Equation~\eref{eq:p1NumbWeightsRequired} for the single odd ball, we estimate number of weights required is approximately
+  The quality of the estimation provided by  Eq.~\eref{eq:p1NumbWeightsRequired} is built on two assumptions.  First, since entropy~$H$ is used as a normalizer, the equation assumes that there is equivalent information gain during each weighing.  Next, if the probability distribution associated with the balance outcomes is not close to uniform, then there will be a large divergence between the
+
+  In addition, entropy,~$H$, cannot be used to calculate the worst case number of weighings since it is essentially a weighted average.  Instead, the worst case information content of the balance ($\log_{2} \max \{\Pr(\text{Balance outcome})\}$) must be used as shown in Eq.~\eref{eq:worstCaseWeighingsCount}.
+
+  \begin{equation}\label{eq:worstCaseWeighingsCount}
+    \max \{\#\text{Weights Required}\} \leq \ceil*{\frac{\log_{2} \abs{\mathcal{H}}}{\log_{2} \max \{\Pr(\text{Balance outcome})\} }}
+  \end{equation}
+
+
+
+  When there is a single odd ball out of twelve, the cardinality of the hypothesis class,~$\abs{\mathcal{H}}$, is ${2 * \binom{12}{1} = 24}$. Each outcome of the balance partitions~$\mathcal{H}$ into subsets of roughly equal probability. This is illustrated in Table~\ref{tab:p1OneBallTable} which shows the correspondence between odd ball balance location and the outcome. Using Eq.~\eref{eq:p1NumbWeightsRequired} for the single odd ball, we estimate number of weights required is approximately
 
   \[ \ceil*{\frac{\log_{2}24}{1.585}} \approx \ceil*{\frac{4.584}{1.585}} \approx \ceil{2.893} = 3 \text{.} \]
 
@@ -49,7 +69,7 @@
 
   When there are three odd balls, $\abs{\mathcal{H}}$ equals~${2\cdot2\cdot2\cdot\binom{12}{3} = 1,760}$.  Estimating the entropy is even more challenging as the probability of an ``Unknown'' configuration is higher.  To simplify the calculation, we reuse the approximated entropy from two ball case.  This results in an estimate of
 
-  \[ \ceil*{\frac{\log_{2} 1760}{H_{mod}}} \approx \ceil*{\frac{10.78}{1.552}} \approx \ceil*{6.945} = \boxed{7}\]
+  \[ \ceil*{\frac{\log_{2} 1760}{H_{approx}}} \approx \ceil*{\frac{10.78}{1.552}} \approx \ceil*{6.945} = \boxed{7}\]
 
   \noindent
   for the expected number of weights.
@@ -72,7 +92,7 @@
 
   \begin{table}
     \centering
-    \caption{Updated probability partition with known ball weights in part (b)}\label{tab:twoBallProbabilityBreakdownKnownWeights}
+    \caption{Updated probability partition with known ball weights in part~(b)}\label{tab:twoBallProbabilityBreakdownKnownWeights}
     \begin{tabular}{|c||c|c|c|}
       \hline
       Balance Position & $\bar{~}\bar{~}|\underline{~~}$  & $\underline{~~}|\bar{~}\bar{~}$  & $-|-$ \\\hline
