@@ -6,32 +6,31 @@
   \textit{Assumptions}:
 
   \begin{itemize}
-    \item The problem states, ``each odd ball may be heavy or light.''  I interpret this to mean that if that all heavy odd balls have equivalent weight.  Similarly, all light odd balls have equivalent weight.
+    \item The problem states, ``each odd ball may be heavy or light.'' This language implies that all heavy odd balls have equivalent weight.  Similarly, the weights of all light odd balls are equivalent.
   \end{itemize}
 
   \noindent
   \textit{Answer}:
 
-  The hypothesis class,~$\mathcal{H}$, is the set of all valid allocations of odd ball(s) in the problem. The number of weights required to determine the correct hypothesis,~$h\in\mathcal{H}$ can be estimated using the equation:
+  The hypothesis class,~$\mathcal{H}$, is the set of all valid allocations of odd ball(s) in the problem. Given a three-outcome balance, the \textit{lower bound} for the required number of weights is:
 
-  \begin{equation}\label{eq:p1NumbWeightsRequired}
-    \mathbb{E}\left[\#\text{Weights Required}\right] \approx \ceil*{\frac{\log_{2} \abs{\mathcal{H}}}{H}} \text{,}
+  \begin{equation}
+    \Omega\left[\#\text{Weights}\right] = \ceil*{\log_{3} \abs{\mathcal{H}}} \text{.}
   \end{equation}
 
   \noindent
-  where $H$ is the balance outcomes' binary entropy.  The logic for this formula is quite intuitive. Representing each element in~$\mathcal{H}$ requires ${\log_{2}\abs{\mathcal{H}}}$~bits.  Binary entropy is the \textit{expected} information gain per weighing (in bits).  Dividing the two yields the \textit{expected number of weights}.
+  The \textit{expected} number of weights can be estimated via:
 
-  The quality of the estimation provided by  Eq.~\eref{eq:p1NumbWeightsRequired} is built on two assumptions.  First, since entropy~$H$ is used as a normalizer, the equation assumes that there is equivalent information gain during each weighing.  Next, if the probability distribution associated with the balance outcomes is not close to uniform, then there will be a large divergence between the
-
-  In addition, entropy,~$H$, cannot be used to calculate the worst case number of weighings since it is essentially a weighted average.  Instead, the worst case information content of the balance ($\log_{2} \max \{\Pr(\text{Balance outcome})\}$) must be used as shown in Eq.~\eref{eq:worstCaseWeighingsCount}.
-
-  \begin{equation}\label{eq:worstCaseWeighingsCount}
-    \max \{\#\text{Weights Required}\} \leq \ceil*{\frac{\log_{2} \abs{\mathcal{H}}}{\log_{2} \max \{\Pr(\text{Balance outcome})\} }}
+  \begin{equation}\label{eq:p1NumbWeightsRequired}
+    \mathbb{E}\left[\#\text{Weights}\right] \approx \ceil*{\frac{\log_{2} \abs{\mathcal{H}}}{H}} \text{,}
   \end{equation}
 
+  \noindent
+  where $H$ is the binary entropy of the balance outcomes.  Eq.~\eref{eq:p1NumbWeightsRequired}'s correctness is quite intuitive. Representing each member of~$\mathcal{H}$ requires ${\log_{2}\abs{\mathcal{H}}}$~bits.  Binary entropy is the \textit{expected} information gain per weighing (in bits).  The ratio of the two in turn yields the \textit{expected number of weights}.
 
+  The quality of the estimate Eq.~\eref{eq:p1NumbWeightsRequired} provides is built on two assumptions.  First, since entropy~$H$ is used as a normalizer, the equation assumes that~$H$ remains constant in each weighing.  Next, if the probability distribution associated with the balance outcomes is far from uniform, then there will be a large divergence between this expected quantity and the upper bound (which is more relevant for Mackay's question).
 
-  When there is a single odd ball out of twelve, the cardinality of the hypothesis class,~$\abs{\mathcal{H}}$, is ${2 * \binom{12}{1} = 24}$. Each outcome of the balance partitions~$\mathcal{H}$ into subsets of roughly equal probability. This is illustrated in Table~\ref{tab:p1OneBallTable} which shows the correspondence between odd ball balance location and the outcome. Using Eq.~\eref{eq:p1NumbWeightsRequired} for the single odd ball, we estimate number of weights required is approximately
+  To verify the Eq.~\eref{eq:p1NumbWeightsRequired}'s applicability, consider the case of a single odd ball.  The cardinality of~$\mathcal{H}$ is ${2 * \binom{12}{1} = 24}$. Each outcome of the balance partitions~$\mathcal{H}$ into subsets of roughly equal probability. This is illustrated in Table~\ref{tab:p1OneBallTable} which shows the correspondence between the odd ball's placement and the balance outcome. Using Eq.~\eref{eq:p1NumbWeightsRequired}, we estimate the expected number of weights required is approximately
 
   \[ \ceil*{\frac{\log_{2}24}{1.585}} \approx \ceil*{\frac{4.584}{1.585}} \approx \ceil{2.893} = 3 \text{.} \]
 
@@ -59,15 +58,15 @@
   \textit{Estimate} how many weights are required by the optimal strategy.  And what if there are three odd balls?
 \end{subproblem}
 
-  When there are two odd balls, $\mathcal{H}$ grows by more than an order of magnitude from~$24$ to ${2\cdot2\cdot\binom{12}{2} = 264}$. In addition, interpreting the balance outcomes is more difficult as shown in Table~\ref{tab:p1TwoBallsUnknownWeights}.  Note first that the number of possible cases has increased six-fold from~6 in Table~\ref{tab:p1OneBallTable} to~36.  Furthermore, we are given no knowledge about the relative weights of a normal, light or heavy ball.  This prevents us from drawing conclusions about the balance's behavior when there are mismatched balls on the same side of the balance.
+  When there are two odd balls, $\abs{\mathcal{H}}$ is ${2\cdot2\cdot\binom{12}{2} = 264}$. Table~\ref{tab:p1TwoBallsUnknownWeights} shows the possible balance locations for two balls.  Since this part of the problem provides no information about the relative ball weights, it is not possible to know \textit{a priori} the balance's behavior when there are mismatched balls on the same side of the balance.
 
   \input{p1_two_ball_table}
 
-  Observe that Table~\ref{tab:p1TwoBallsUnknownWeights} has a column labeled ``Probability''; it denotes the likelihood of a balance configuration.  $P_{1}$~and $P_{2}$ in that table equal~$\frac{3}{154}$ and~$\frac{4}{121}$, respectively.  Table~\ref{tab:twoBallProbabilityBreakdown} lists the grouped probability of each balance outcome.\footnote{The calculations assumes an equivalent number of balls in the left and right balance as well as off the scale (similar to Mackay's approach).}  Using this table to calculate binary entropy is problematic as the ``Unknown'' cases do not fit neatly into any three of the balance outcomes.  For simplicity, we divide the probability for the ``Unknown'' cases equally across the three outcomes.  Therefore, this \textit{approximated entropy} equals equals~$1.552$.   Using Eq.~\eref{eq:p1NumbWeightsRequired}, we estimate the number of weights required for two odd balls is:
+  The column labeled ``Probability'' in Table~\ref{tab:p1TwoBallsUnknownWeights} denotes the likelihood of the corresponding balance configuration.  $P_{1}$~and $P_{2}$ equal~$\frac{3}{154}$ and~$\frac{4}{121}$, respectively.\footnote{These values are based on four balls each in the left and right balance as well as four off to the side.}  Table~\ref{tab:twoBallProbabilityBreakdown} lists the grouped probability of each balance outcome.  Using this table to calculate binary entropy is problematic as the ``Unknown'' cases do not fit neatly into any three of the balance outcomes.  For simplicity, we spread the probability for the ``Unknown'' cases equally across the three outcomes.  Therefore, this \textit{approximated entropy} equals~$1.552$.   Using Eq.~\eref{eq:p1NumbWeightsRequired}, we estimate the expected number of weights required for two odd balls is:
 
   \[ \ceil*{\frac{\log_{2} 264}{H_{approx}}} \approx \ceil*{\frac{8.044}{1.552}} \approx \ceil*{5.182} = \boxed{6} \text{.} \]
 
-  When there are three odd balls, $\abs{\mathcal{H}}$ equals~${2\cdot2\cdot2\cdot\binom{12}{3} = 1,760}$.  Estimating the entropy is even more challenging as the probability of an ``Unknown'' configuration is higher.  To simplify the calculation, we reuse the approximated entropy from two ball case.  This results in an estimate of
+  When there are three odd balls, $\abs{\mathcal{H}}$ equals~${2\cdot2\cdot2\cdot\binom{12}{3} = 1,760}$.  Estimating the entropy is made more challenging than two odd balls as the probability of the ``Unknown'' configurations rises.  To simplify the calculation, we reuse the approximated entropy from the two ball case.  This results in an estimate of
 
   \[ \ceil*{\frac{\log_{2} 1760}{H_{approx}}} \approx \ceil*{\frac{10.78}{1.552}} \approx \ceil*{6.945} = \boxed{7}\]
 
@@ -84,11 +83,31 @@
     \end{tabular}
   \end{table}
 
+  To estimate the worst case number of weights, Eq.~\eref{eq:p1NumbWeightsRequired} changes slightly as shown below.
+
+  \begin{equation}\label{eq:p1NumbWeightsWorstCase}
+    O\left[\#\text{Weights}\right] = \ceil*{\frac{\log_{2} \abs{\mathcal{H}}}{-\log_{2} \left(\max \{\Pr(\text{Balance})\} \right) }}
+  \end{equation}
+
+  Using Table~\ref{tab:twoBallProbabilityBreakdown}, the $\Pr(\text{Balance})$ equals~0.356.  Accounting for the equal spreading of the ``Unknown'' probability, we will use probability~0.382 in the calculations below.  Therefore, the worst case number of weighings for two balls is estimated as:
+
+  \[ O\left[\#\text{Weights Two Balls}\right] \approx \ceil*{\frac{\log_{2} 264}{-\log_{2} 0.382}} \approx \ceil{5.792} = \boxed{6} \text{.} \]
+
+  \noindent
+  Similarly, for three balls, the upper bound is:
+
+  \[ O\left[\#\text{Weights Three Balls}\right] \approx \ceil*{\frac{\log_{2} 1760}{-\log_{2} 0.382}} \approx \ceil{7.766} = \boxed{8} \text{.} \]
+
+  \noindent
+  \textit{Conclusion}:
+
+  For two odd balls, both the expected and upper bound calculations estimated that 6~weights are required.  This provides very high confidence in the estimation.  When there are three odd balls, the upper bound of 8~weights appears to be a more appropriate estimation.
+
 \begin{subproblem}
   How do your answers change if it is known that all the regular balls weigh 100g, that light balls weight 99g, and heavy ones weigh 110g?
 \end{subproblem}
 
-  In part~(a), uncertainty about the balance's behavior in some cases necessitated that we approximate the binary entropy.  Now that the relative ball weights are known, Cases~\#33-34 and Cases~\#35-36 in Table~\ref{tab:p1TwoBallsUnknownWeights} are assigned to ``${\underline{~~}|\bar{~}\bar{~}}$'' and ``${\bar{~}\bar{~}|\underline{~~}}$'' respectively.  The updated probability breakdown for each balance outcome is shown in Table~\ref{tab:twoBallProbabilityBreakdownKnownWeights}.  This corresponds to a binary entropy of~$1.531$.  Note that even though we have more information, the binary entropy went down.  That is because when approximating the entropy, we spread the probability corresponding to the ``Unknown'' case evenly across the three balance outcomes.  This lead to a more balanced probability mass function (PMF), which in turn led to a higher entropy.
+  In part~(a), uncertainty about the balance's behavior in some cases necessitated that we approximate the binary entropy.  Now that the relative ball weights are known, Cases~\#33-34 and Cases~\#35-36 in Table~\ref{tab:p1TwoBallsUnknownWeights} are assigned to ``${\underline{~~}|\bar{~}\bar{~}}$'' and ``${\bar{~}\bar{~}|\underline{~~}}$'' respectively.  The updated probability breakdown for each balance outcome is shown in Table~\ref{tab:twoBallProbabilityBreakdownKnownWeights}.  This corresponds to a binary entropy of~$1.531$.  Note that even though we have more information, the binary entropy went down.  That is because when approximating the entropy in part~(a), we spread the probability corresponding to the ``Unknown'' case evenly across the three balance outcomes.  This lead to a more balanced probability mass function (pmf), which in turn led to a higher entropy.
 
   \begin{table}
     \centering
@@ -100,5 +119,6 @@
     \end{tabular}
   \end{table}
 
-  Using the updated entropy, the expected number of weights for two balls remains~6.  For three balls, the estimated number of weights increased to~${\ceil*{7.042} = 8}$.  However, it would not be correct to assign this large change in the number of weights entirely to the updated entropy.  Instead, a relatively small change in the expected count was magnified by the ceiling function in Equation~\eref{eq:p1NumbWeightsRequired}.
+  Using the updated entropy, the expected number of weights for two balls remains~6, but the worst case was $\ceil{6.003} = 7$.  Given that the worst case is only marginally greater than six before applying the ceiling function, we hypothesize that six measurements is the better estimate.
 
+  For three balls, the expected number of weights increased to~${\ceil*{7.042} = 8}$ and the worst case estimate was ${\ceil{8.045} = 9}$.  Both the expected and worst case estimates are only slightly more than their previous estimate.  We estimate that splitting the difference and estimating $8$~weights is the best estimate for three balls.
